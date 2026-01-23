@@ -1,162 +1,178 @@
-import { useState, useMemo, useEffect } from "react";
-import type { Toon, ToonCategory, SortField, ToonStats } from "@/types";
+import { useState, useMemo, useEffect, useCallback } from "react";
+import type {
+  ToonCategory,
+  SortField,
+  SortDirection,
+  FilterOptions,
+} from "@/types";
+import { getToons } from "@/services/toonService"; // <--- Importamos la lógica centralizada
 
-export interface FilterState {
+// Estado interno de la UI (separado de la lógica de negocio)
+export interface UseCharacterFiltersState {
   search: string;
   categories: ToonCategory[];
   activeAbilityOnly: boolean;
+  sortBy: SortField;
+  sortDirection: SortDirection;
 }
 
-const INITIAL_FILTERS: FilterState = {
+const INITIAL_STATE: UseCharacterFiltersState = {
   search: "",
   categories: [],
   activeAbilityOnly: false,
+  sortBy: "name", // Default que coincida con el servicio
+  sortDirection: "asc",
 };
 
-// Helper puro para parsear (sin lógica de window aquí para evitar errores SSR)
-const parseParams = (searchParams: URLSearchParams) => {
+/**
+ * Helper puro para leer la URL.
+ * Extrae la verdad desde el querystring del navegador.
+ */
+const parseUrlParams = (
+  searchParams: URLSearchParams
+): UseCharacterFiltersState => {
   const search = searchParams.get("q") || "";
   const active = searchParams.get("active") === "true";
 
   const catParam = searchParams.get("cat");
   const categories = catParam
-    ? catParam
-        .split(",")
-        .filter(Boolean)
-        .map((c) => c.trim().toLowerCase() as ToonCategory)
+    ? (catParam.split(",").filter(Boolean) as ToonCategory[])
     : [];
 
   const sort = (searchParams.get("sort") as SortField) || "name";
-  // Si explícitamente es 'desc', es false. Sino (null, 'asc', etc) es true.
-  const asc = searchParams.get("dir") !== "desc";
+  const dir = (searchParams.get("dir") as SortDirection) || "asc";
 
   return {
-    filters: { search, categories, activeAbilityOnly: active },
-    sort,
-    asc,
+    search,
+    categories,
+    activeAbilityOnly: active,
+    sortBy: sort,
+    sortDirection: dir,
   };
 };
 
-export const useCharacterFilters = (toons: Toon[]) => {
-  // 1. ESTADO INICIAL "SEGURO"
-  // Inicializamos con valores por defecto para que coincida con el servidor (SSR)
-  // y evitar errores de hidratación visual (botones grises vs azules).
-  const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
-  const [sortOrder, setSortOrder] = useState<SortField>("name");
-  const [isAscending, setIsAscending] = useState(true);
-
-  // Flag para saber si ya estamos en el cliente
+export const useCharacterFilters = () => {
+  // 1. ESTADO
+  const [filters, setFilters] =
+    useState<UseCharacterFiltersState>(INITIAL_STATE);
   const [isMounted, setIsMounted] = useState(false);
 
-  // 2. EFECTO DE MONTAJE (Hydration Fix) [Diagram of React Hydration process]
-  // Este efecto corre SOLO una vez en el cliente tras el primer render.
-  // Lee la URL y actualiza el estado, forzando a React a pintar los botones azules.
+  // 2. HYDRATION (Client-side mount)
+  // Leemos la URL solo una vez al montar para inicializar el estado
   useEffect(() => {
     setIsMounted(true);
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
-      const parsed = parseParams(params);
-
-      setFilters(parsed.filters);
-      setSortOrder(parsed.sort);
-      setIsAscending(parsed.asc);
+      const urlState = parseUrlParams(params);
+      setFilters(urlState);
     }
-  }, []); // Array vacío = Solo al montar
+  }, []);
 
-  // 3. GENERAR QUERY STRING
-  const currentQueryString = useMemo(() => {
-    // Si no estamos montados, no generamos query string para evitar sobrescribir URL prematuramente
-    if (!isMounted) return "";
+  // 3. LOGICA DE NEGOCIO (DELEGADA AL SERVICIO)
+  // Aquí ocurre la magia: No reinventamos la rueda. Usamos getToons.
+  // Cada vez que cambia el estado 'filters', recalculamos la lista.
+  const results = useMemo(() => {
+    const options: FilterOptions = {
+      searchTerm: filters.search,
+      categories: filters.categories,
+      hasActiveAbility: filters.activeAbilityOnly ? true : undefined, // undefined para que el servicio lo ignore si es false
+      sortBy: filters.sortBy,
+      sortDirection: filters.sortDirection,
+    };
 
+    return getToons(options);
+  }, [filters]);
+
+  // 🔥 NUEVO: Calculamos el string AQUÍ para poder devolverlo
+  const queryString = useMemo(() => {
     const params = new URLSearchParams();
 
     if (filters.search) params.set("q", filters.search);
     if (filters.activeAbilityOnly) params.set("active", "true");
-    if (filters.categories.length > 0) {
+    if (filters.categories.length > 0)
       params.set("cat", filters.categories.join(","));
-    }
 
-    params.set("sort", sortOrder);
-    params.set("dir", isAscending ? "asc" : "desc");
+    // Solo agregamos sort si no es el default
+    if (filters.sortBy !== "name") params.set("sort", filters.sortBy);
+    if (filters.sortDirection !== "asc")
+      params.set("dir", filters.sortDirection);
 
     return params.toString();
-  }, [filters, sortOrder, isAscending, isMounted]);
+  }, [filters]);
 
-  // 4. SINCRONIZAR URL (State -> URL)
+  // 4. URL SYNC (Efecto secundario)
+  // Actualizamos la URL cuando cambian los filtros
+  // 🔥 ACTUALIZADO: El efecto ahora usa la variable calculada arriba
   useEffect(() => {
-    if (!isMounted || typeof window === "undefined") return;
+    if (!isMounted) return;
 
-    // Leemos la URL actual del navegador para comparar
-    const currentSearch = window.location.search.replace(/^\?/, "");
+    const currentBrowserParams = window.location.search.replace(/^\?/, "");
 
-    // Si la URL generada es diferente a la del navegador, la actualizamos.
-    // Esto evita bucles infinitos.
-    if (currentSearch !== currentQueryString) {
-      const newUrl = currentQueryString
-        ? `${window.location.pathname}?${currentQueryString}`
+    if (queryString !== currentBrowserParams) {
+      const newUrl = queryString
+        ? `${window.location.pathname}?${queryString}`
         : window.location.pathname;
 
       window.history.replaceState(null, "", newUrl);
     }
-  }, [currentQueryString, isMounted]);
+  }, [queryString, isMounted]); // Dependemos de queryString
 
-  // 5. LÓGICA DE FILTRADO
-  const filteredAndSortedToons = useMemo(() => {
-    let result = [...toons];
+  // 5. HANDLERS (Acciones explícitas)
+  // En lugar de exponer un setFilters genérico, exponemos acciones claras.
 
-    // Fuzzy Search
-    if (filters.search) {
-      const q = filters.search.toLowerCase();
-      result = result.filter((t) => t.name.toLowerCase().includes(q));
-    }
-    // Categories
-    if (filters.categories.length > 0) {
-      result = result.filter((t) => filters.categories.includes(t.category));
-    }
-    // Active Ability
-    if (filters.activeAbilityOnly) {
-      result = result.filter((t) => t.hasActiveAbility);
-    }
+  const setSearch = useCallback((term: string) => {
+    setFilters((prev) => ({ ...prev, search: term }));
+  }, []);
 
-    // Sorting
-    result.sort((a, b) => {
-      const getValue = (item: Toon, field: SortField) => {
-        if (field === "name" || field === "releaseDate") return item[field];
-        return item.stats[field as keyof ToonStats] || 0;
-      };
-
-      const valA = getValue(a, sortOrder);
-      const valB = getValue(b, sortOrder);
-
-      if (valA === valB) return 0;
-      if (valA === null || valA === undefined) return 1;
-      if (valB === null || valB === undefined) return -1;
-
-      const comparison = valA > valB ? 1 : -1;
-      return isAscending ? comparison : -comparison;
+  const toggleCategory = useCallback((category: ToonCategory) => {
+    setFilters((prev) => {
+      const exists = prev.categories.includes(category);
+      const newCats = exists
+        ? prev.categories.filter((c) => c !== category)
+        : [...prev.categories, category];
+      return { ...prev, categories: newCats };
     });
+  }, []);
 
-    return result;
-  }, [toons, filters, sortOrder, isAscending]);
+  const toggleActiveAbility = useCallback(() => {
+    setFilters((prev) => ({
+      ...prev,
+      activeAbilityOnly: !prev.activeAbilityOnly,
+    }));
+  }, []);
 
-  const handleReset = () => {
-    setFilters(INITIAL_FILTERS);
-    setSortOrder("name");
-    setIsAscending(true);
-  };
+  const setSorting = useCallback((field: SortField) => {
+    setFilters((prev) => {
+      // Si clicamos el mismo campo, invertimos dirección. Si es nuevo, reseteamos a asc.
+      const newDir =
+        prev.sortBy === field && prev.sortDirection === "asc" ? "desc" : "asc";
+      return { ...prev, sortBy: field, sortDirection: newDir };
+    });
+  }, []);
 
-  const toggleSortDirection = () => setIsAscending(!isAscending);
+  const resetFilters = useCallback(() => {
+    setFilters(INITIAL_STATE);
+  }, []);
 
   return {
-    toons: filteredAndSortedToons,
-    filters,
-    queryString: currentQueryString,
-    sortOrder,
-    isAscending,
-    setFilters,
-    setSortOrder,
-    toggleSortDirection,
-    handleReset,
-    isMounted, // Exportamos esto por si quieres mostrar un loading spinner
+    // Data
+    toons: results,
+    totalCount: results.length,
+    isLoading: !isMounted,
+
+    // State Values (Read-only para la UI)
+    search: filters.search,
+    selectedCategories: filters.categories,
+    activeAbilityOnly: filters.activeAbilityOnly,
+    sortBy: filters.sortBy,
+    sortDirection: filters.sortDirection,
+
+    queryString,
+    // Actions
+    setSearch,
+    toggleCategory,
+    toggleActiveAbility,
+    setSorting,
+    resetFilters,
   };
 };
