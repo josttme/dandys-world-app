@@ -1,0 +1,53 @@
+---
+// src/pages/[type]/index.astro
+import MainLayout from "@layouts/MainLayout.astro";
+import CharacterList from "@components/character-list/CharacterList";
+import { getToons } from "@services/toonService";
+
+export async function getStaticPaths() {
+  const allToons = getToons({});
+  const types = [...new Set(allToons.map((t) => t.type))];
+
+  return types.map((type) => {
+    const firstToon = allToons.find((t) => t.type === type);
+    return {
+      params: { type },
+      props: { firstToon },
+    };
+  });
+}
+
+const { type } = Astro.params;
+const { firstToon } = Astro.props;
+
+const desktopTarget = `/${firstToon.type}/${firstToon.category}/${firstToon.id}`;
+---
+
+<MainLayout title={`Lista de ${type}`}>
+  <script define:vars={{ desktopTarget }}>
+    if (window.innerWidth >= 768) {
+      window.location.replace(desktopTarget);
+    }
+  </script>
+
+  {/* SOLUCIÓN AL SCROLL MÓVIL */}
+  {
+    /* 1. h-screen + overflow-hidden: Congelamos la pantalla para que no se mueva el body */
+  }
+  <div class="flex h-screen w-full flex-col overflow-hidden bg-slate-900">
+    {/* 2. Cabecera Fija (flex-none): El título se queda quieto arriba */}
+    <div class="z-10 flex-none border-b border-slate-800 bg-slate-900 p-4 pb-2">
+      <h1 class="text-2xl font-bold text-white capitalize">
+        Personajes: <span class="text-blue-400">{type}</span>
+      </h1>
+    </div>
+
+    {/* 3. Contenedor de la Lista (flex-1): Ocupa TODO el espacio restante */}
+    {
+      /* 'min-h-0' es un truco crucial de Flexbox para permitir el scroll interno en hijos */
+    }
+    <div class="min-h-0 flex-1 p-4 pt-2">
+      <CharacterList filterByType={type} initialId="" client:visible />
+    </div>
+  </div>
+</MainLayout>

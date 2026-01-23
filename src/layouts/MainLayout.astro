@@ -1,0 +1,75 @@
+---
+// src/layouts/MainLayout.astro
+import { ClientRouter } from "astro:transitions";
+const { title } = Astro.props;
+import "@styles/global.css";
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <ClientRouter />
+  </head>
+  <body
+    class="m-0 overflow-hidden bg-[#202020] bg-[repeating-linear-gradient(-70deg,rgba(0,0,0,0.1)_0px,rgba(0,0,0,0.1)_50px,transparent_50px,transparent_100px)] p-0 font-sans text-white selection:bg-yellow-400 selection:text-black"
+  >
+    <slot />
+  </body>
+</html>
+
+<!-- ---
+import Sidebar from "@components/sidebar/Sidebar";
+import CharacterList from "@components/character-list/CharacterList";
+import { CATEGORY_ORDER } from "@config/consts";
+import { ClientRouter } from "astro:transitions";
+import "@styles/global.css";
+
+const { title, char, type, category } = Astro.props;
+
+const currentType = type || "toon";
+
+const activeCategory = category
+  ? category.toLowerCase()
+  : CATEGORY_ORDER[0].toLowerCase();
+
+const mobileDetailClass = char
+  ? "fixed inset-0 z-50 flex w-full h-full md:static md:z-0 md:flex-1"
+  : "hidden md:flex md:flex-1";
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title} | Dandy's World</title>
+    <ClientRouter />
+  </head>
+  <body
+    class="m-0 bg-[#202020] bg-[repeating-linear-gradient(-70deg,rgba(0,0,0,0.1)_0px,rgba(0,0,0,0.1)_50px,transparent_50px,transparent_100px)] p-0 font-sans text-white selection:bg-yellow-400 selection:text-black lg:overflow-hidden"
+  >
+    <div class="flex h-screen w-screen flex-col md:flex-row">
+      <Sidebar client:load filter={currentType} />
+
+      <CharacterList
+        client:load
+        transition:persist
+        transition:name="character-list-grid"
+        category={category}
+        selectedChar={char}
+      />
+
+      <div class={mobileDetailClass}>
+        <slot />
+         {
+          !char && (
+            <div class="hidden h-full w-full items-center justify-center text-white/20 md:flex">
+              <span class="animate-pulse">Seleccionando...</span>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </body>
+</html> -->

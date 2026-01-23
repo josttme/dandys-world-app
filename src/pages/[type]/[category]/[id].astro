@@ -1,0 +1,54 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import CharacterList from "@components/character-list/CharacterList";
+import CharacterDetail from "@components/character-detail/CharacterDetail";
+import { getToons } from "@services/toonService";
+
+export async function getStaticPaths() {
+  const allToons = getToons({});
+  return allToons.map((toon) => ({
+    params: { type: toon.type, category: toon.category, id: toon.id },
+    props: { toon },
+  }));
+}
+
+const { type, category } = Astro.params;
+const { toon } = Astro.props;
+---
+
+<MainLayout title={toon.name}>
+  <div class="flex h-screen overflow-hidden">
+    {/* --- COLUMNA IZQUIERDA (LISTA) --- */}
+    {
+      /* En Desktop: visible. En Mobile: OCULTA (hidden) porque estamos viendo el detalle */
+    }
+
+    {/* 🔥 AQUÍ ESTÁ LA SOLUCIÓN DEL BORDE VERDE */}
+    {/* Al pasarle 'toon', React sabe cuál pintar */}
+    <aside class="hidden md:flex md:w-[40%] md:flex-col">
+      <CharacterList
+        transition:persist="sidebar-list"
+        initialId={toon.id}
+        filterByType={type}
+        client:load
+      />
+    </aside>
+
+    {/* --- COLUMNA DERECHA (DETALLE) --- */}
+    {/* En Mobile ocupamos todo el ancho */}
+    <main class="relative w-full flex-1 overflow-y-auto bg-slate-800">
+      {/* Botón "Atrás" solo para Móvil */}
+      {
+        /* Este botón nos llevará a la vista de "Solo Lista" que crearemos en el paso 3 */
+      }
+      <a
+        href={`/${toon.type}`}
+        class="absolute top-4 left-4 z-20 rounded-full bg-slate-700/80 p-2 text-white shadow-lg backdrop-blur md:hidden"
+      >
+        ⬅️ Volver a la lista
+      </a>
+
+      <CharacterDetail transition:animate="fade" char={toon} />
+    </main>
+  </div>
+</MainLayout>

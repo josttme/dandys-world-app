@@ -1,0 +1,2243 @@
+[
+  {
+    "id": "blot",
+    "name": "Blot",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2025-05-23",
+    "description": "Blot the Ink Blob, also known as Blot, is one of the 38 playable Toons in Dandy's World. He was introduced on May 23, 2025. He is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/blot/avatar.png",
+      "full": "/images/toons/blot/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 1,
+      "movementSpeed": 4,
+      "stamina": 5,
+      "stealth": 3,
+      "extractionSpeed": 2
+    },
+    "abilities": [
+      {
+        "name": "Blot Jr.",
+        "slug": "blot_jr",
+        "type": "active",
+        "description": "This Toon places a decoy that attracts nearby Twisteds and has 1 Heart. This ability costs 10 Tapes and has a cooldown of 60 seconds. For each extra Blot on a team the cost of the decoy costs an additional 10 tapes."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/blot/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/blot/skins/vintage.webp"
+      },
+      {
+        "id": "show_time",
+        "name": "Show-Time",
+        "image": "/images/toons/blot/skins/show-time.webp"
+      },
+      {
+        "id": "cozy_pink",
+        "name": "Cozy Pink",
+        "image": "/images/toons/blot/skins/cozy_pink.webp"
+      },
+      {
+        "id": "sanguine_silence",
+        "name": "Sanguine Silence",
+        "image": "/images/toons/blot/skins/sanguine_silence.webp"
+      }
+    ]
+  },
+  {
+    "id": "boxten",
+    "name": "Boxten",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2023-12-16",
+    "description": "Boxten the Music Box, also known as Boxten, is one of the 38 playable Toons in Dandy's World. He was introduced on June 14, 2024. He is either available for free as your starter Toon, or, if  Poppy was chosen, is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/boxten/avatar.png",
+      "full": "/images/toons/boxten/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 3,
+      "stamina": 3,
+      "stealth": 3,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Wind-Up",
+        "slug": "wind_up",
+        "type": "passive",
+        "description": "This Toon gains 6% more Extraction Speed for every alive Toon in the round. Maxes at 48%."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/boxten/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/boxten/skins/vintage.webp"
+      },
+      {
+        "id": "cloudy_dream",
+        "name": "Cloudy Dream",
+        "image": "/images/toons/boxten/skins/cloudy_dream.webp"
+      },
+      {
+        "id": "passionate_wisteria",
+        "name": "Passionate Wisteria",
+        "image": "/images/toons/boxten/skins/passionate_wisteria.webp"
+      },
+      {
+        "id": "creepy_chord",
+        "name": "Creepy Chord",
+        "image": "/images/toons/boxten/skins/creepy_chord.webp"
+      },
+      {
+        "id": "quiet_caroler",
+        "name": "Quiet Caroler",
+        "image": "/images/toons/boxten/skins/quiet_caroler.webp"
+      }
+    ]
+  },
+  {
+    "id": "brightney",
+    "name": "Brightney",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-06-14",
+    "description": "Brightney the Lamp, also known as Brightney, is one of the 38 playable Toons in Dandy's World. She was introduced on June 14, 2024. She is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/brightney/avatar.png",
+      "full": "/images/toons/brightney/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 3,
+      "stamina": 4,
+      "stealth": 1,
+      "extractionSpeed": 4
+    },
+    "abilities": [
+      {
+        "name": "Night Light",
+        "slug": "night_light",
+        "type": "active",
+        "description": "This Toon can shine lights on Twisteds to make them visible during Blackouts for 8 seconds. Has a Cooldown of 45."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/brightney/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/brightney/skins/vintage.webp"
+      },
+      {
+        "id": "antique_shade",
+        "name": "Antique Shade",
+        "image": "/images/toons/brightney/skins/antique_shade.webp"
+      }
+    ]
+  },
+  {
+    "id": "brusha",
+    "name": "Brusha",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2025-08-08",
+    "description": "Brusha the Paint Brush, also known as Brusha, is one of the 38 playable Toons in Dandy's World. She was introduced on August 8, 2025, alongside  Dyle. She is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/brusha/avatar.png",
+      "full": "/images/toons/brusha/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 4,
+      "movementSpeed": 3,
+      "stamina": 3,
+      "stealth": 2,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Artistic Inspiration",
+        "slug": "artistic_inspiration",
+        "type": "toggle",
+        "description": "Enter Painting Mode to inspire nearby Toons with a 50% Skill Check boost while they remain in your circle. This Toon moves 25% slower while in Painting Mode. Has a cooldown of 5."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/brusha/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/brusha/skins/vintage.webp"
+      },
+      {
+        "id": "gloomy_sleeper",
+        "name": "Gloomy Sleeper",
+        "image": "/images/toons/brusha/skins/gloomy_sleeper.webp"
+      },
+      {
+        "id": "scary_stylish",
+        "name": "Scary Stylish",
+        "image": "/images/toons/brusha/skins/scary_stylish.webp"
+      },
+      {
+        "id": "autumn_palette",
+        "name": "Autumn Palette",
+        "image": "/images/toons/brusha/skins/autumn_palette.webp"
+      },
+      {
+        "id": "figure_painter",
+        "name": "Figure Painter",
+        "image": "/images/toons/brusha/skins/figure_painter.webp"
+      }
+    ]
+  },
+  {
+    "id": "connie",
+    "name": "Connie",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-12-06",
+    "description": "Connie the Ghost, also known as Connie, Boolynski (real name) or Miss. Boolynski by  Rodger and the Halloween Toons, is one of the 38 playable Toons in Dandy's World. She was introduced on December 6th, 2024, alongside  Looey. She is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/connie/avatar.png",
+      "full": "/images/toons/connie/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 2,
+      "movementSpeed": 1,
+      "stamina": 3,
+      "stealth": 5,
+      "extractionSpeed": 4
+    },
+    "abilities": [
+      {
+        "name": "Haunting Escape",
+        "slug": "haunting_escape",
+        "type": "active",
+        "description": "This Toon uses her ability to become invisible for 5 seconds. Twisteds will not be able to notice her during this time, unless she is up against a Lethal Twisted which will still see her. Has a cooldown of 50."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/connie/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/connie/skins/vintage.webp"
+      },
+      {
+        "id": "frosty_mittens",
+        "name": "Frosty Mittens",
+        "image": "/images/toons/connie/skins/frosty_mittens.webp"
+      },
+      {
+        "id": "lilac_haunting",
+        "name": "Lilac Haunting",
+        "image": "/images/toons/connie/skins/lilac_haunting.webp"
+      },
+      {
+        "id": "ghastly_glow",
+        "name": "Ghastly Glow",
+        "image": "/images/toons/connie/skins/ghastly_glow.webp"
+      },
+      {
+        "id": "brisk_breeze",
+        "name": "Brisk Breeze",
+        "image": "/images/toons/connie/skins/brisk_breeze.webp"
+      }
+    ]
+  },
+  {
+    "id": "cosmo",
+    "name": "Cosmo",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-08-14",
+    "description": "Cosmo the Pastry, also known as Cosmo, is one of the 38 playable Toons in Dandy's World. He was introduced on August 14th, 2024, alongside  Sprout,  Glisten, and  Finn. He is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/cosmo/avatar.png",
+      "full": "/images/toons/cosmo/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 1,
+      "movementSpeed": 3,
+      "stamina": 4,
+      "stealth": 4,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Sharing is Caring",
+        "slug": "sharing_is_caring",
+        "type": "active",
+        "description": "This Toon can give one of his own Hearts to heal a targeted Toon. Cannot be used when at 1 Heart. Has a Cooldown of 60."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/cosmo/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/cosmo/skins/vintage.webp"
+      },
+      {
+        "id": "caramel_drizzle",
+        "name": "Caramel Drizzle",
+        "image": "/images/toons/cosmo/skins/caramel_drizzle.webp"
+      },
+      {
+        "id": "berry_roll",
+        "name": "Berry Roll",
+        "image": "/images/toons/cosmo/skins/berry_roll.webp"
+      },
+      {
+        "id": "dessertful_scientist",
+        "name": "Dessertful Scientist",
+        "image": "/images/toons/cosmo/skins/dessertful_scientist.webp"
+      },
+      {
+        "id": "snow_time",
+        "name": "Snow-Time",
+        "image": "/images/toons/cosmo/skins/snow-time.webp"
+      },
+      {
+        "id": "sweet_roll",
+        "name": "Sweet Roll",
+        "image": "/images/toons/cosmo/skins/sweet_roll.webp"
+      }
+    ]
+  },
+  {
+    "id": "finn",
+    "name": "Finn",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-08-14",
+    "description": "Finn the Fish Bowl, also known as Finn, is one of the 38 playable Toons in Dandy's World. He was introduced on August 14th, 2024, alongside  Cosmo,  Glisten, and  Sprout. He is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/finn/avatar.png",
+      "full": "/images/toons/finn/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 4,
+      "movementSpeed": 3,
+      "stamina": 2,
+      "stealth": 3,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Reel In",
+        "slug": "reel_in",
+        "type": "passive",
+        "description": "This Toon gains a 33% Movement Speed boost when any Machine is completed for 10 seconds."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/finn/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/finn/skins/vintage.webp"
+      },
+      {
+        "id": "prismatic_pal",
+        "name": "Prismatic Pal",
+        "image": "/images/toons/finn/skins/prismatic_pal.webp"
+      },
+      {
+        "id": "tacky_sweater",
+        "name": "Tacky Sweater",
+        "image": "/images/toons/finn/skins/tacky_sweater.webp"
+      }
+    ]
+  },
+  {
+    "id": "flutter",
+    "name": "Flutter",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-07-12",
+    "description": "Flutter the Butterfly, also known as Flutter, is one of the 38 playable Toons in Dandy's World. She was introduced on July 12, 2024, alongside  Shelly,  Teagan, and  Tisha. She is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/flutter/avatar.png",
+      "full": "/images/toons/flutter/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 2,
+      "movementSpeed": 4,
+      "stamina": 4,
+      "stealth": 3,
+      "extractionSpeed": 2
+    },
+    "abilities": [
+      {
+        "name": "Floaty Dash",
+        "slug": "floaty_dash",
+        "type": "active",
+        "description": "This Toon can dash forward, drastically increasing her Movement Speed for 0.75 seconds. Has a cooldown of 45 seconds."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/flutter/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/flutter/skins/vintage.webp"
+      },
+      {
+        "id": "vivid_monarch",
+        "name": "Vivid Monarch",
+        "image": "/images/toons/flutter/skins/vivid_monarch.webp"
+      },
+      {
+        "id": "frosty_fluff",
+        "name": "Frosty Fluff",
+        "image": "/images/toons/flutter/skins/frosty_fluff.webp"
+      }
+    ]
+  },
+  {
+    "id": "gigi",
+    "name": "Gigi",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-09-28",
+    "description": "Gigi the Gachapon, also known as Gigi, is one of the 38 playable Toons in Dandy's World. She was introduced on September 28, 2024. She is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/gigi/avatar.png",
+      "full": "/images/toons/gigi/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 5,
+      "movementSpeed": 3,
+      "stamina": 1,
+      "stealth": 3,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Surprise!",
+        "slug": "surprise",
+        "type": "active",
+        "description": "This Toon can grant herself a random item from any Tier (Dandy's Shop items included). Has a Cooldown of 80."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/gigi/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/gigi/skins/vintage.webp"
+      },
+      {
+        "id": "rainy_day",
+        "name": "Rainy Day",
+        "image": "/images/toons/gigi/skins/rainy_day.webp"
+      },
+      {
+        "id": "snowball_fight",
+        "name": "Snowball Fight",
+        "image": "/images/toons/gigi/skins/snowball_fight.webp"
+      }
+    ]
+  },
+  {
+    "id": "glisten",
+    "name": "Glisten",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-08-14",
+    "description": "Glisten the Mirror, also known as Glisten, is one of the 38 playable Toons in Dandy's World. He was introduced on August 14th, 2024, alongside  Sprout,  Cosmo, and  Finn. He is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/glisten/avatar.png",
+      "full": "/images/toons/glisten/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 2,
+      "movementSpeed": 3,
+      "stamina": 3,
+      "stealth": 2,
+      "extractionSpeed": 5
+    },
+    "abilities": [
+      {
+        "name": "Reflection",
+        "slug": "reflection",
+        "type": "active",
+        "description": "This Toon can travel through a mirror, instantly teleporting to a targeted Toon regardless of line of sight and can inflict Confused III on himself. Has a cooldown of 100."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/glisten/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/glisten/skins/vintage.webp"
+      },
+      {
+        "id": "cozy_sweater",
+        "name": "Cozy Sweater",
+        "image": "/images/toons/glisten/skins/cozy_sweater.webp"
+      },
+      {
+        "id": "crimson_imp",
+        "name": "Crimson Imp",
+        "image": "/images/toons/glisten/skins/crimson_imp.webp"
+      },
+      {
+        "id": "wrapped_chic",
+        "name": "Wrapped Chic",
+        "image": "/images/toons/glisten/skins/wrapped_chic.webp"
+      },
+      {
+        "id": "sparkling_snow",
+        "name": "Sparkling Snow",
+        "image": "/images/toons/glisten/skins/sparkling_snow.webp"
+      }
+    ]
+  },
+  {
+    "id": "goob",
+    "name": "Goob",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-06-14",
+    "description": "Goob the Fluffy Craft, also known as Goob, is one of the 38 playable Toons in Dandy's World. He was introduced on June 14th, 2024. He is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/goob/avatar.png",
+      "full": "/images/toons/goob/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 4,
+      "stamina": 4,
+      "stealth": 2,
+      "extractionSpeed": 2
+    },
+    "abilities": [
+      {
+        "name": "Hug!",
+        "slug": "hug",
+        "type": "active",
+        "description": "This Toon can pull other Toons towards his position. Needs direct line of sight. 30 second cooldown."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/goob/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/goob/skins/vintage.webp"
+      },
+      {
+        "id": "fun_partygoer",
+        "name": "Fun Partygoer",
+        "image": "/images/toons/goob/skins/fun_partygoer.webp"
+      },
+      {
+        "id": "special_spaghetti",
+        "name": "Special Spaghetti",
+        "image": "/images/toons/goob/skins/special_spaghetti.webp"
+      }
+    ]
+  },
+  {
+    "id": "looey",
+    "name": "Looey",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-12-06",
+    "description": "Looey the Balloon, also known as Looey, is one of the 38 playable Toons in Dandy's World. He was introduced on December 6, 2024, alongside  Connie. He is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/looey/avatar.png",
+      "full": "/images/toons/looey/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 4,
+      "movementSpeed": 3,
+      "stamina": 3,
+      "stealth": 2,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Heart of Helium",
+        "slug": "heart_of_helium",
+        "type": "passive",
+        "description": "For each missing heart this Toon has, they gain 20% more walk and run speed multiplier. At one heart, this Toon gains 40% more speed multiplier. His speed is reduced back when healed."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/looey/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/looey/skins/vintage.webp"
+      },
+      {
+        "id": "dapperly_festive",
+        "name": "Dapperly Festive",
+        "image": "/images/toons/looey/skins/dapperly_festive.webp"
+      },
+      {
+        "id": "swirling_mix_up",
+        "name": "Swirling Mix Up",
+        "image": "/images/toons/looey/skins/swirling_mix_up.webp"
+      },
+      {
+        "id": "show_time",
+        "name": "Show-Time",
+        "image": "/images/toons/looey/skins/show-time.webp"
+      },
+      {
+        "id": "creepy_clown",
+        "name": "Creepy Clown",
+        "image": "/images/toons/looey/skins/creepy_clown.webp"
+      }
+    ]
+  },
+  {
+    "id": "poppy",
+    "name": "Poppy",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2023-12-16",
+    "description": "Poppy the Bubble, also known as Poppy, is one of the 38 playable Toons in Dandy's World. She was introduced on June 14, 2024. She is either available as your starter Toon or, if  Boxten was chosen instead, is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/poppy/avatar.png",
+      "full": "/images/toons/poppy/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 3,
+      "stamina": 3,
+      "stealth": 3,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Panic Pop",
+        "slug": "panic_pop",
+        "type": "passive",
+        "description": "This Toon receives a 50% Speed boost for 3 seconds when attacked."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/poppy/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/poppy/skins/vintage.webp"
+      },
+      {
+        "id": "sapphire_dots",
+        "name": "Sapphire Dots",
+        "image": "/images/toons/poppy/skins/sapphire_dots.webp"
+      },
+      {
+        "id": "picnic_outing",
+        "name": "Picnic Outing",
+        "image": "/images/toons/poppy/skins/picnic_outing.webp"
+      },
+      {
+        "id": "bowful_beauty",
+        "name": "Bowful Beauty",
+        "image": "/images/toons/poppy/skins/bowful_beauty.webp"
+      },
+      {
+        "id": "double_bubble",
+        "name": "Double Bubble",
+        "image": "/images/toons/poppy/skins/double_bubble.webp"
+      },
+      {
+        "id": "confident_caroler",
+        "name": "Confident Caroler",
+        "image": "/images/toons/poppy/skins/confident_caroler.webp"
+      }
+    ]
+  },
+  {
+    "id": "rodger",
+    "name": "Rodger",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-06-14",
+    "description": "Rodger the Magnifying Glass, also known as Rodger, is one of the 38 playable Toons in Dandy's World. He was introduced on June 14, 2024. He is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/rodger/avatar.png",
+      "full": "/images/toons/rodger/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 2,
+      "stamina": 3,
+      "stealth": 3,
+      "extractionSpeed": 4
+    },
+    "abilities": [
+      {
+        "name": "Detective",
+        "slug": "detective",
+        "type": "passive",
+        "description": "This Toon gains twice the amount of Research from Capsules and encountering Twisteds."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/rodger/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/rodger/skins/vintage.webp"
+      },
+      {
+        "id": "alpha_sleeper",
+        "name": "Alpha Sleeper",
+        "image": "/images/toons/rodger/skins/alpha_sleeper.webp"
+      },
+      {
+        "id": "ebony_detective",
+        "name": "Ebony Detective",
+        "image": "/images/toons/rodger/skins/ebony_detective.webp"
+      },
+      {
+        "id": "festive_detective",
+        "name": "Festive Detective",
+        "image": "/images/toons/rodger/skins/festive_detective.webp"
+      },
+      {
+        "id": "list_maker",
+        "name": "List Maker",
+        "image": "/images/toons/rodger/skins/list_maker.webp"
+      }
+    ]
+  },
+  {
+    "id": "scraps",
+    "name": "Scraps",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-06-14",
+    "description": "Scraps the Paper Craft, also known as Scraps, is one of the 38 playable Toons in Dandy's World. She was introduced on June 14th, 2024. She is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/scraps/avatar.png",
+      "full": "/images/toons/scraps/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 2,
+      "movementSpeed": 2,
+      "stamina": 5,
+      "stealth": 3,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Crafty Grapple",
+        "slug": "crafty_grapple",
+        "type": "active",
+        "description": "This Toon can pull herself towards another Toon or Machine's targeted position. Needs direct line of sight. 25 second cooldown."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/scraps/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/scraps/skins/vintage.webp"
+      },
+      {
+        "id": "pastel_paper",
+        "name": "Pastel Paper",
+        "image": "/images/toons/scraps/skins/pastel_paper.webp"
+      },
+      {
+        "id": "cutesy_calico",
+        "name": "Cutesy Calico",
+        "image": "/images/toons/scraps/skins/cutesy_calico.webp"
+      }
+    ]
+  },
+  {
+    "id": "shrimpo",
+    "name": "Shrimpo",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-06-14",
+    "description": "Shrimpo the Shrimp, also known as Shrimpo, is one of the 38 playable Toons in Dandy's World. He was introduced on June 14, 2024. He is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/shrimpo/avatar.png",
+      "full": "/images/toons/shrimpo/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 1,
+      "movementSpeed": 1,
+      "stamina": 1,
+      "stealth": 1,
+      "extractionSpeed": 1
+    },
+    "abilities": [
+      {
+        "name": "Bully",
+        "slug": "bully",
+        "type": "passive",
+        "description": "Stealth is drastically lower than any other Toon. Only play this Toon if you are looking for a challenge."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/shrimpo/skins/default.webp"
+      }
+    ]
+  },
+  {
+    "id": "teagan",
+    "name": "Teagan",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-07-12",
+    "description": "Teagan the Teacup, also known as Teagan, is one of the 38 playable Toons in Dandy's World. She was introduced on July 12, 2024, alongside  Flutter,  Shelly, and  Tisha. She is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/teagan/avatar.png",
+      "full": "/images/toons/teagan/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 3,
+      "stamina": 4,
+      "stealth": 2,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Tea Time",
+        "slug": "tea_time",
+        "type": "active",
+        "description": "This Toon can spend 75 Tapes to heal themselves by 1 Heart. Has a Cooldown of 100."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/teagan/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/teagan/skins/vintage.webp"
+      },
+      {
+        "id": "purple_elegance",
+        "name": "Purple Elegance",
+        "image": "/images/toons/teagan/skins/purple_elegance.webp"
+      },
+      {
+        "id": "shining_wreath",
+        "name": "Shining Wreath",
+        "image": "/images/toons/teagan/skins/shining_wreath.webp"
+      }
+    ]
+  },
+  {
+    "id": "tisha",
+    "name": "Tisha",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-07-12",
+    "description": "Tisha the Tissue Box, also known as Tisha, is one of the 38 playable Toons in Dandy's World. She was introduced on July 12, 2024, alongside  Flutter,  Shelly, and  Teagan. She is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/tisha/avatar.png",
+      "full": "/images/toons/tisha/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 4,
+      "movementSpeed": 4,
+      "stamina": 2,
+      "stealth": 3,
+      "extractionSpeed": 2
+    },
+    "abilities": [
+      {
+        "name": "Tidy Up!",
+        "slug": "tidy_up",
+        "type": "active",
+        "description": "This Toon can create a pulse that increases the Movement Speed of Toons around her by 25% for 5 seconds. Has a Cooldown of 50."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/tisha/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/tisha/skins/vintage.webp"
+      },
+      {
+        "id": "lavender_maid",
+        "name": "Lavender Maid",
+        "image": "/images/toons/tisha/skins/lavender_maid.webp"
+      },
+      {
+        "id": "winter_mint",
+        "name": "Winter Mint",
+        "image": "/images/toons/tisha/skins/winter_mint.webp"
+      }
+    ]
+  },
+  {
+    "id": "toodles",
+    "name": "Toodles",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-06-14",
+    "description": "Toodles the Eight Ball, also known as Toodles, is one of the 38 playable Toons in Dandy's World. She was introduced on June 14, 2024. She is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/toodles/avatar.png",
+      "full": "/images/toons/toodles/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 3,
+      "stamina": 3,
+      "stealth": 4,
+      "extractionSpeed": 2
+    },
+    "abilities": [
+      {
+        "name": "Beginner's Luck",
+        "slug": "beginner_s_luck",
+        "type": "active",
+        "description": "This Toon can roll for a 15% boost to a random Stat that lasts for 10 seconds. Has a cooldown of 25."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/toodles/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/toodles/skins/vintage.webp"
+      },
+      {
+        "id": "junior_detective",
+        "name": "Junior Detective",
+        "image": "/images/toons/toodles/skins/junior_detective.webp"
+      },
+      {
+        "id": "candy_critter",
+        "name": "Candy Critter",
+        "image": "/images/toons/toodles/skins/candy_critter.webp"
+      },
+      {
+        "id": "dog_plush_onesie",
+        "name": "Dog Plush Onesie",
+        "image": "/images/toons/toodles/skins/dog_plush_onesie.webp"
+      },
+      {
+        "id": "festive_dress",
+        "name": "Festive Dress",
+        "image": "/images/toons/toodles/skins/festive_dress.webp"
+      },
+      {
+        "id": "little_helper",
+        "name": "Little Helper",
+        "image": "/images/toons/toodles/skins/little_helper.webp"
+      }
+    ]
+  },
+  {
+    "id": "yatta",
+    "name": "Yatta",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2025-03-14",
+    "description": "Yatta the Piñata, also known as Yatta, is one of the 38 playable Toons in Dandy's World. She was introduced on March 14, 2025. She is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/yatta/avatar.png",
+      "full": "/images/toons/yatta/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 4,
+      "stamina": 1,
+      "stealth": 2,
+      "extractionSpeed": 5
+    },
+    "abilities": [
+      {
+        "name": "Piñata Party",
+        "slug": "pi_ata_party",
+        "type": "passive",
+        "description": "This Toon drops 2 random candy items after completing a machine, and 4 random candy items when injured."
+      }
+    ],
+    "skins": []
+  },
+  {
+    "id": "bassie",
+    "name": "Bassie",
+    "category": "main",
+    "type": "toon",
+    "event": "easter",
+    "releaseDate": null,
+    "description": "Bassie, full name Bassie Bloomington, is one of the 12 playable Holiday Toons and one of the 8 playable Main Characters in Dandy's World. She was introduced on April 18, alongside  Cocoa,  Eggson, and  Flyte. She is only available during the Easter Event in Bassie's Store.",
+    "images": {
+      "avatar": "/images/toons/bassie/avatar.png",
+      "full": "/images/toons/bassie/full.png"
+    },
+    "stats": {
+      "health": 2,
+      "skillCheck": 1,
+      "movementSpeed": 5,
+      "stamina": 4,
+      "stealth": 4,
+      "extractionSpeed": 2
+    },
+    "abilities": [
+      {
+        "name": "Springful Sharing",
+        "slug": "springful_sharing",
+        "type": "active",
+        "description": "This Toon can drop items from her inventory, sharing them with other Toons."
+      },
+      {
+        "name": "Easter Basket",
+        "slug": "easter_basket",
+        "type": "passive",
+        "description": "This Toon's basket provides her with an extra inventory slot for carrying 1 extra item."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/bassie/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/bassie/skins/vintage.webp"
+      },
+      {
+        "id": "belle_basket",
+        "name": "Belle Basket",
+        "image": "/images/toons/bassie/skins/belle_basket.webp"
+      }
+    ]
+  },
+  {
+    "id": "gourdy",
+    "name": "Gourdy",
+    "category": "main",
+    "type": "toon",
+    "event": "halloween",
+    "releaseDate": "2025-10-10",
+    "description": "Gourdy, full name Gourdy Holloway, is one of the 12 playable Holiday Toons and one of the 8 playable Main Characters in Dandy's World. He was introduced on October 10, 2025, alongside  Eclipse,  Ribecca, and  Soulvester. He is only available during the Halloween Event in Gourdy's Store.",
+    "images": {
+      "avatar": "/images/toons/gourdy/avatar.png",
+      "full": "/images/toons/gourdy/full.png"
+    },
+    "stats": {
+      "health": 2,
+      "skillCheck": 5,
+      "movementSpeed": 4,
+      "stamina": 1,
+      "stealth": 1,
+      "extractionSpeed": 5
+    },
+    "abilities": [
+      {
+        "name": "Trick or Treat",
+        "slug": "trick_or_treat",
+        "type": "active",
+        "description": "This Toon applies a random 20% boost for 15 seconds to all Toons within range. Has a cooldown of 35."
+      },
+      {
+        "name": "Sugar Rush",
+        "slug": "sugar_rush",
+        "type": "passive",
+        "description": "Provides a 20% speed boost to all Players for 5 seconds when the Elevator opens and when Panic Mode begins."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/gourdy/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/gourdy/skins/vintage.webp"
+      },
+      {
+        "id": "midnight_sleeper",
+        "name": "Midnight Sleeper",
+        "image": "/images/toons/gourdy/skins/midnight_sleeper.webp"
+      },
+      {
+        "id": "crinkling_leaves",
+        "name": "Crinkling Leaves",
+        "image": "/images/toons/gourdy/skins/crinkling_leaves.webp"
+      },
+      {
+        "id": "lost_prince",
+        "name": "Lost Prince",
+        "image": "/images/toons/gourdy/skins/lost_prince.webp"
+      },
+      {
+        "id": "fresh_fall",
+        "name": "Fresh Fall",
+        "image": "/images/toons/gourdy/skins/fresh_fall.webp"
+      }
+    ]
+  },
+  {
+    "id": "pebble",
+    "name": "Pebble",
+    "category": "main",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-06-14",
+    "description": "Pebble, full name Pebble Dancifer Jr., is one of the 38 playable Toons in Dandy's World. He was introduced on June 14, 2024. He is one of the 8 playable Main Characters and can be purchased in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/pebble/avatar.png",
+      "full": "/images/toons/pebble/full.png"
+    },
+    "stats": {
+      "health": 2,
+      "skillCheck": 3,
+      "movementSpeed": 5,
+      "stamina": 4,
+      "stealth": 3,
+      "extractionSpeed": 1
+    },
+    "abilities": [
+      {
+        "name": "Speak!",
+        "slug": "speak",
+        "type": "active",
+        "description": "This Toon can bark loudly, drastically decreasing Stealth to a value of -40 and alerting any Twisteds nearby to his location. Has a cooldown of 60."
+      },
+      {
+        "name": "Fetch!",
+        "slug": "fetch",
+        "type": "passive",
+        "description": "This Toon can sniff out items, causing them to be highlighted when in the Toon's vicinity."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/pebble/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/pebble/skins/vintage.webp"
+      },
+      {
+        "id": "loyal_bud",
+        "name": "Loyal Bud",
+        "image": "/images/toons/pebble/skins/loyal_bud.webp"
+      },
+      {
+        "id": "thorned_geode",
+        "name": "Thorned Geode",
+        "image": "/images/toons/pebble/skins/thorned_geode.webp"
+      },
+      {
+        "id": "star_time",
+        "name": "Star-Time",
+        "image": "/images/toons/pebble/skins/star-time.webp"
+      },
+      {
+        "id": "served_eggy",
+        "name": "Served Eggy",
+        "image": "/images/toons/pebble/skins/served_eggy.webp"
+      },
+      {
+        "id": "extra_cheese",
+        "name": "Extra Cheese",
+        "image": "/images/toons/pebble/skins/extra_cheese.webp"
+      },
+      {
+        "id": "gleeful_gift",
+        "name": "Gleeful Gift",
+        "image": "/images/toons/pebble/skins/gleeful_gift.webp"
+      }
+    ]
+  },
+  {
+    "id": "shelly",
+    "name": "Shelly",
+    "category": "main",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-07-12",
+    "description": "Shelly, full name Shelly Fossilian, is one of the 38 playable Toons in Dandy's World. She was introduced on July 12, 2024, alongside  Flutter,  Teagan, and  Tisha. She is one of the 8 playable Main Characters and can be purchased in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/shelly/avatar.png",
+      "full": "/images/toons/shelly/full.png"
+    },
+    "stats": {
+      "health": 2,
+      "skillCheck": 5,
+      "movementSpeed": 3,
+      "stamina": 2,
+      "stealth": 3,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Inspiration",
+        "slug": "inspiration",
+        "type": "active",
+        "description": "This Toon can boost the Extraction Speed of a selected Toon by 75% for 15 seconds. Has a cooldown of 60."
+      },
+      {
+        "name": "Problem Solver",
+        "slug": "problem_solver",
+        "type": "passive",
+        "description": "This Toon gains a 25% Movement Speed boost when any Machine is completed for 10 seconds."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/shelly/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/shelly/skins/vintage.webp"
+      },
+      {
+        "id": "dino_snore",
+        "name": "Dino Snore",
+        "image": "/images/toons/shelly/skins/dino_snore.webp"
+      },
+      {
+        "id": "star_time",
+        "name": "Star-Time",
+        "image": "/images/toons/shelly/skins/star-time.webp"
+      },
+      {
+        "id": "cheer_bear",
+        "name": "Cheer Bear",
+        "image": "/images/toons/shelly/skins/cheer_bear.webp"
+      },
+      {
+        "id": "violet_caster",
+        "name": "Violet Caster",
+        "image": "/images/toons/shelly/skins/violet_caster.webp"
+      },
+      {
+        "id": "fall_stroll",
+        "name": "Fall Stroll",
+        "image": "/images/toons/shelly/skins/fall_stroll.webp"
+      },
+      {
+        "id": "prehistoric_peppermint",
+        "name": "Prehistoric Peppermint",
+        "image": "/images/toons/shelly/skins/prehistoric_peppermint.webp"
+      }
+    ]
+  },
+  {
+    "id": "sprout",
+    "name": "Sprout",
+    "category": "main",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-08-14",
+    "description": "Sprout, full name Sprout Seedly, is one of the 38 playable Toons in Dandy's World. He was introduced on August 14, 2024, alongside  Cosmo,  Finn, and  Glisten. He is one of the 8 playable Main Characters and can be purchased in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/sprout/avatar.png",
+      "full": "/images/toons/sprout/full.png"
+    },
+    "stats": {
+      "health": 2,
+      "skillCheck": 2,
+      "movementSpeed": 4,
+      "stamina": 5,
+      "stealth": 3,
+      "extractionSpeed": 2
+    },
+    "abilities": [
+      {
+        "name": "Baked Sweets",
+        "slug": "baked_sweets",
+        "type": "active",
+        "description": "This Toon can heal a targeted Toon by 1 Heart at the cost of 100 Tapes. For each extra Sprout, the cost increases by 50 Tapes and the Cooldown increases by 30. Has a cooldown of 100."
+      },
+      {
+        "name": "Overprotective",
+        "slug": "overprotective",
+        "type": "passive",
+        "description": "This Toon can see where all the other alive Toons are, along with their current Health status."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/sprout/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/sprout/skins/vintage.webp"
+      },
+      {
+        "id": "salted_caramel",
+        "name": "Salted Caramel",
+        "image": "/images/toons/sprout/skins/salted_caramel.webp"
+      },
+      {
+        "id": "star_time",
+        "name": "Star-Time",
+        "image": "/images/toons/sprout/skins/star-time.webp"
+      },
+      {
+        "id": "chocoberry",
+        "name": "ChocoBerry",
+        "image": "/images/toons/sprout/skins/chocoberry.webp"
+      },
+      {
+        "id": "berry_beast",
+        "name": "Berry Beast",
+        "image": "/images/toons/sprout/skins/berry_beast.webp"
+      },
+      {
+        "id": "sugary_shortcake",
+        "name": "Sugary Shortcake",
+        "image": "/images/toons/sprout/skins/sugary_shortcake.webp"
+      }
+    ]
+  },
+  {
+    "id": "vee",
+    "name": "Vee",
+    "category": "main",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-06-14",
+    "description": "Vee, full name Vee Version 1, is one of the 38 playable Toons in Dandy's World. She was introduced on June 14, 2024. She is one of the 8 playable Main Characters and can be purchased in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/vee/avatar.png",
+      "full": "/images/toons/vee/full.png"
+    },
+    "stats": {
+      "health": 2,
+      "skillCheck": 4,
+      "movementSpeed": 2,
+      "stamina": 3,
+      "stealth": 2,
+      "extractionSpeed": 5
+    },
+    "abilities": [
+      {
+        "name": "Mic Check",
+        "slug": "mic_check",
+        "type": "active",
+        "description": "This Toon can highlight all Twisteds and Machines on the Floor for 5 seconds. Has a Cooldown of 50."
+      },
+      {
+        "name": "Camera Hijack",
+        "slug": "camera_hijack",
+        "type": "passive",
+        "description": "This Toon will have the 2 nearest uncompleted Machines highlighted for them."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/vee/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/vee/skins/vintage.webp"
+      },
+      {
+        "id": "cosmic_signal",
+        "name": "Cosmic Signal",
+        "image": "/images/toons/vee/skins/cosmic_signal.webp"
+      },
+      {
+        "id": "star_time",
+        "name": "Star-Time",
+        "image": "/images/toons/vee/skins/star-time.webp"
+      },
+      {
+        "id": "show_time",
+        "name": "Show-Time",
+        "image": "/images/toons/vee/skins/show-time.webp"
+      },
+      {
+        "id": "zapped_creation",
+        "name": "Zapped Creation",
+        "image": "/images/toons/vee/skins/zapped_creation.webp"
+      },
+      {
+        "id": "holiday_special",
+        "name": "Holiday Special",
+        "image": "/images/toons/vee/skins/holiday_special.webp"
+      }
+    ]
+  },
+  {
+    "id": "cocoa",
+    "name": "Cocoa",
+    "category": "event",
+    "type": "toon",
+    "event": "easter",
+    "releaseDate": "2025-04-18",
+    "description": "Cocoa the Chocolate Bunny, also known as Cocoa, is one of the 12 Holiday Toons in Dandy's World. She was introduced on April 18, 2025, alongside  Bassie,  Eggson, and  Flyte. She is only available during the Easter Event in Bassie's Store.",
+    "images": {
+      "avatar": "/images/toons/cocoa/avatar.png",
+      "full": "/images/toons/cocoa/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 4,
+      "stamina": 2,
+      "stealth": 4,
+      "extractionSpeed": 2
+    },
+    "abilities": [
+      {
+        "name": "Bonbon",
+        "slug": "bonbon",
+        "type": "active",
+        "description": "This Toon places a Bonbon candy item that can be picked up and used by anyone. When used, the Bonbon boosts extraction speed (+50%) and movement speed (+25%) for 5 seconds. Has a cooldown of 40."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/cocoa/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/cocoa/skins/vintage.webp"
+      },
+      {
+        "id": "spring_outing",
+        "name": "Spring Outing",
+        "image": "/images/toons/cocoa/skins/spring_outing.webp"
+      }
+    ]
+  },
+  {
+    "id": "eggson",
+    "name": "Eggson",
+    "category": "event",
+    "type": "toon",
+    "event": "easter",
+    "releaseDate": "2025-04-18",
+    "description": "Eggson the Egg, also known as Eggson, is one of the 12 Holiday Toons in Dandy's World. He was introduced on April 18, 2025, alongside  Bassie,  Cocoa, and  Flyte. He is only available during the Easter Event in Bassie's Store.",
+    "images": {
+      "avatar": "/images/toons/eggson/avatar.png",
+      "full": "/images/toons/eggson/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 3,
+      "stamina": 3,
+      "stealth": 3,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Fixer Upper",
+        "slug": "fixer_upper",
+        "type": "passive",
+        "description": "This Toon hits a machine with his cane when he first extracts from it, granting 10% completion. This can only be used once per machine."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/eggson/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/eggson/skins/vintage.webp"
+      },
+      {
+        "id": "painted_patterns",
+        "name": "Painted Patterns",
+        "image": "/images/toons/eggson/skins/painted_patterns.webp"
+      }
+    ]
+  },
+  {
+    "id": "flyte",
+    "name": "Flyte",
+    "category": "event",
+    "type": "toon",
+    "event": "easter",
+    "releaseDate": "2025-04-18",
+    "description": "Flyte the Butterfly, also known as Flyte, is one of the 12 Holiday Toons in Dandy's World. He was introduced on April 18, 2025, alongside  Bassie,  Cocoa, and  Eggson. He is only available during the Easter Event in Bassie's Store.",
+    "images": {
+      "avatar": "/images/toons/flyte/avatar.png",
+      "full": "/images/toons/flyte/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 2,
+      "movementSpeed": 4,
+      "stamina": 2,
+      "stealth": 3,
+      "extractionSpeed": 4
+    },
+    "abilities": [
+      {
+        "name": "Gust",
+        "slug": "gust",
+        "type": "active",
+        "description": "This Toon places a \"Gust\" at his location for 10 seconds. Any Toon that walks into the Gust recieves a +15% Movement Speed boost for 5 seconds. Has a cooldown of 50."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/flyte/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/flyte/skins/vintage.webp"
+      },
+      {
+        "id": "spring_sky",
+        "name": "Spring Sky",
+        "image": "/images/toons/flyte/skins/spring_sky.webp"
+      }
+    ]
+  },
+  {
+    "id": "eclipse",
+    "name": "Eclipse",
+    "category": "event",
+    "type": "toon",
+    "event": "halloween",
+    "releaseDate": "2025-10-10",
+    "description": "Eclipse the Werewolf, also known as Eclipse, is one of the 12 Holiday Toons in Dandy's World. She was introduced on October 10, 2025, alongside  Gourdy,  Ribecca, and  Soulvester. She is only available during the Halloween Event in Gourdy's Store.",
+    "images": {
+      "avatar": "/images/toons/eclipse/avatar.png",
+      "full": "/images/toons/eclipse/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 4,
+      "stamina": 3,
+      "stealth": 2,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Total Eclipse",
+        "slug": "total_eclipse",
+        "type": "passive",
+        "description": "This Toon transforms into a werewolf in blackouts, giving off a glow, gaining 2 Stamina Stars, and a 20% Movement Speed boost."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/eclipse/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/eclipse/skins/vintage.webp"
+      },
+      {
+        "id": "full_moon",
+        "name": "Full Moon",
+        "image": "/images/toons/eclipse/skins/full_moon.webp"
+      },
+      {
+        "id": "little_red",
+        "name": "Little Red",
+        "image": "/images/toons/eclipse/skins/little_red.webp"
+      },
+      {
+        "id": "howling_moonstone",
+        "name": "Howling Moonstone",
+        "image": "/images/toons/eclipse/skins/howling_moonstone.webp"
+      }
+    ]
+  },
+  {
+    "id": "ribecca",
+    "name": "Ribecca",
+    "category": "event",
+    "type": "toon",
+    "event": "halloween",
+    "releaseDate": "2025-10-10",
+    "description": "Ribecca the Skeleton, also known as Ribecca, is one of the 12 Holiday Toons in Dandy's World. She was introduced on October 10, 2025, alongside  Eclipse,  Gourdy, and  Soulvester. She is only available during the Halloween Event in Gourdy's Store.",
+    "images": {
+      "avatar": "/images/toons/ribecca/avatar.png",
+      "full": "/images/toons/ribecca/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 3,
+      "stamina": 3,
+      "stealth": 3,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "The Undead",
+        "slug": "the_undead",
+        "type": "passive",
+        "description": "Ribecca is immune to all applied debuffs (does not include trinkets)"
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/ribecca/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/ribecca/skins/vintage.webp"
+      },
+      {
+        "id": "skele_kitty",
+        "name": "Skele-Kitty",
+        "image": "/images/toons/ribecca/skins/skele-kitty.webp"
+      },
+      {
+        "id": "haunted_topic",
+        "name": "Haunted Topic",
+        "image": "/images/toons/ribecca/skins/haunted_topic.webp"
+      }
+    ]
+  },
+  {
+    "id": "soulvester",
+    "name": "Soulvester",
+    "category": "event",
+    "type": "toon",
+    "event": "halloween",
+    "releaseDate": "2025-10-10",
+    "description": "Soulvester the Ghostly Knight, also known as Soulvester, is one of the 12 Holiday Toons in Dandy's World. He was introduced on October 10, 2025, alongside  Eclipse,  Gourdy, and  Ribecca. He is only available during the Halloween Event in Gourdy's Store.",
+    "images": {
+      "avatar": "/images/toons/soulvester/avatar.png",
+      "full": "/images/toons/soulvester/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 5,
+      "movementSpeed": 1,
+      "stamina": 1,
+      "stealth": 3,
+      "extractionSpeed": 5
+    },
+    "abilities": [
+      {
+        "name": "Knightly Armor",
+        "slug": "knightly_armor",
+        "type": "passive",
+        "description": "This Toon has an extra heart and is immune to damage from ranged attacks."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/soulvester/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/soulvester/skins/vintage.webp"
+      },
+      {
+        "id": "haunted_flame",
+        "name": "Haunted Flame",
+        "image": "/images/toons/soulvester/skins/haunted_flame.webp"
+      },
+      {
+        "id": "gourd_guard",
+        "name": "Gourd Guard",
+        "image": "/images/toons/soulvester/skins/gourd_guard.webp"
+      }
+    ]
+  },
+  {
+    "id": "razzle_and_dazzle",
+    "name": "Razzle & Dazzle",
+    "category": "normal",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-06-14",
+    "description": "Razzle & Dazzle the Twin Masks, also known as Razzle & Dazzle, is one of the 38 playable Toons in Dandy's World. He was introduced on June 14, 2024. He is available to be bought in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/razzle_and_dazzle/avatar.png",
+      "full": "/images/toons/razzle_and_dazzle/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 5,
+      "stamina": 3,
+      "stealth": 3,
+      "extractionSpeed": 5
+    },
+    "abilities": [
+      {
+        "name": "Comedy/Tragedy",
+        "slug": "comedy_tragedy",
+        "type": "passive",
+        "description": "This Toon swaps between Movement Speed on odd numbered Floors, and Extraction Speed on even numbered Floors."
+      }
+    ],
+    "skins": []
+  },
+  {
+    "id": "astro",
+    "name": "Astro",
+    "category": "main",
+    "type": "toon",
+    "event": null,
+    "releaseDate": "2024-06-14",
+    "description": "Astro, full name Astro Novalite, is one of the 38 playable Toons in Dandy's World. He was introduced on June 14, 2024. He is one of the 8 playable Main Characters and can be purchased in Dandy's Store.",
+    "images": {
+      "avatar": "/images/toons/astro/avatar.png",
+      "full": "/images/toons/astro/full.png"
+    },
+    "stats": {
+      "health": 2,
+      "skillCheck": 2,
+      "movementSpeed": 3,
+      "stamina": 3,
+      "stealth": 5,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Nap Time",
+        "slug": "nap_time",
+        "type": "active",
+        "description": "This Toon can create a pulse that fully restores the Stamina of the Toons around him. Has a cooldown of 60."
+      },
+      {
+        "name": "Well Rested",
+        "slug": "well_rested",
+        "type": "passive",
+        "description": "This Toon regenerates Stamina 50% faster, and can see Toons below 50% Stamina around the map. And can see the exact amount below 50%."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/astro/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/astro/skins/vintage.webp"
+      },
+      {
+        "id": "starry_night",
+        "name": "Starry Night",
+        "image": "/images/toons/astro/skins/starry_night.webp"
+      },
+      {
+        "id": "star_time",
+        "name": "Star-Time",
+        "image": "/images/toons/astro/skins/star-time.webp"
+      },
+      {
+        "id": "bedtime_bear",
+        "name": "Bedtime Bear",
+        "image": "/images/toons/astro/skins/bedtime_bear.webp"
+      },
+      {
+        "id": "scarlet_night",
+        "name": "Scarlet Night",
+        "image": "/images/toons/astro/skins/scarlet_night.webp"
+      },
+      {
+        "id": "north_star",
+        "name": "North Star",
+        "image": "/images/toons/astro/skins/north_star.webp"
+      }
+    ]
+  },
+  {
+    "id": "bobette",
+    "name": "Bobette",
+    "category": "main",
+    "type": "toon",
+    "event": "christmas",
+    "releaseDate": "2025-01-10",
+    "description": "Bobette, full name Bobette Carolynne, is one of the 12 playable Holiday Toons and one of the 8 playable Main Characters in Dandy's World. She was introduced on January 10, 2025, alongside  Coal,  Ginger, and  Rudie. She is only available during the Christmas Event in Bobette's Store.",
+    "images": {
+      "avatar": "/images/toons/bobette/avatar.png",
+      "full": "/images/toons/bobette/full.png"
+    },
+    "stats": {
+      "health": 2,
+      "skillCheck": 4,
+      "movementSpeed": 3,
+      "stamina": 5,
+      "stealth": 2,
+      "extractionSpeed": 2
+    },
+    "abilities": [
+      {
+        "name": "Precious Packaging",
+        "slug": "precious_packaging",
+        "type": "active",
+        "description": "This Toon can duck and cover herself into a gift box for 8 seconds, in which she is invincible yet unable to move. Has a cooldown of 90."
+      },
+      {
+        "name": "Festive Aura",
+        "slug": "festive_aura",
+        "type": "passive",
+        "description": "The festive aura of this Toon passively gives those around her 50% faster stamina regeneration and a 25% speed boost that lasts for 5 seconds."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/bobette/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/bobette/skins/vintage.webp"
+      },
+      {
+        "id": "eve_sleeper",
+        "name": "Eve Sleeper",
+        "image": "/images/toons/bobette/skins/eve_sleeper.webp"
+      },
+      {
+        "id": "holly_lace",
+        "name": "Holly Lace",
+        "image": "/images/toons/bobette/skins/holly_lace.webp"
+      },
+      {
+        "id": "snow_time",
+        "name": "Snow-Time",
+        "image": "/images/toons/bobette/skins/snow-time.webp"
+      },
+      {
+        "id": "hot_chocolate",
+        "name": "Hot Chocolate",
+        "image": "/images/toons/bobette/skins/hot_chocolate.webp"
+      },
+      {
+        "id": "golden_bauble",
+        "name": "Golden Bauble",
+        "image": "/images/toons/bobette/skins/golden_bauble.webp"
+      }
+    ]
+  },
+  {
+    "id": "coal",
+    "name": "Coal",
+    "category": "event",
+    "type": "toon",
+    "event": "christmas",
+    "releaseDate": "2025-01-10",
+    "description": "Coal the Pet Rock, also known as Coal, is one of the 12 Holiday Toons in Dandy's World. She was introduced on January 10, 2025, alongside Bobette Render Bobette, Ginger Render Ginger, and Rudie Render Rudie. She is only available during the Christmas Event in Bobette's Store.",
+    "images": {
+      "avatar": "/images/toons/coal/avatar.png",
+      "full": "/images/toons/coal/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 2,
+      "movementSpeed": 4,
+      "stamina": 4,
+      "stealth": 3,
+      "extractionSpeed": 2
+    },
+    "abilities": [
+      {
+        "name": "Scout",
+        "slug": "scout",
+        "type": "active",
+        "description": "This Toon can sniff out items across the map, causing items to be highlighted for all Toons for 10 seconds. Has a cooldown of 30."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/coal/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/coal/skins/vintage.webp"
+      },
+      {
+        "id": "pretty_present",
+        "name": "Pretty Present",
+        "image": "/images/toons/coal/skins/pretty_present.webp"
+      },
+      {
+        "id": "snowy_rescue",
+        "name": "Snowy Rescue",
+        "image": "/images/toons/coal/skins/snowy_rescue.webp"
+      },
+      {
+        "id": "snow_time",
+        "name": "Snow-Time",
+        "image": "/images/toons/coal/skins/snow-time.webp"
+      },
+      {
+        "id": "golden_dust",
+        "name": "Golden Dust",
+        "image": "/images/toons/coal/skins/golden_dust.webp"
+      }
+    ]
+  },
+  {
+    "id": "ginger",
+    "name": "Ginger",
+    "category": "event",
+    "type": "toon",
+    "event": "christmas",
+    "releaseDate": "2025-01-10",
+    "description": "Ginger the Cookie, also known as Ginger, is one of the 12 Holiday Toons in Dandy's World. She was introduced on January 10, 2025, alongside  Bobette,  Coal, and  Rudie. She is only available during the Christmas Event in Bobette's Store.",
+    "images": {
+      "avatar": "/images/toons/ginger/avatar.png",
+      "full": "/images/toons/ginger/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 2,
+      "stamina": 3,
+      "stealth": 4,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Baked with Care!",
+        "slug": "baked_with_care",
+        "type": "active",
+        "description": "This toon can heal a nearby targeted Toon to full Hearts for 100 tapes with a cooldown of 100. For every extra Ginger, the cost increases by 50 Tapes and the Cooldown increases by 30."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/ginger/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/ginger/skins/vintage.webp"
+      },
+      {
+        "id": "minty_pine",
+        "name": "Minty Pine",
+        "image": "/images/toons/ginger/skins/minty_pine.webp"
+      },
+      {
+        "id": "sugar_cookie",
+        "name": "Sugar Cookie",
+        "image": "/images/toons/ginger/skins/sugar_cookie.webp"
+      },
+      {
+        "id": "snow_time",
+        "name": "Snow-Time",
+        "image": "/images/toons/ginger/skins/snow-time.webp"
+      },
+      {
+        "id": "golden_cookie",
+        "name": "Golden Cookie",
+        "image": "/images/toons/ginger/skins/golden_cookie.webp"
+      }
+    ]
+  },
+  {
+    "id": "rudie",
+    "name": "Rudie",
+    "category": "event",
+    "type": "toon",
+    "event": "christmas",
+    "releaseDate": "2025-01-10",
+    "description": "Rudie the Reindeer, also known as Rudie, is one of the 12 Holiday Toons in Dandy's World. He was introduced on January 10, 2025, alongside  Bobette,  Coal, and  Ginger. He is only available during the Christmas Event in Bobette's Store.",
+    "images": {
+      "avatar": "/images/toons/rudie/avatar.png",
+      "full": "/images/toons/rudie/full.png"
+    },
+    "stats": {
+      "health": 3,
+      "skillCheck": 3,
+      "movementSpeed": 3,
+      "stamina": 3,
+      "stealth": 3,
+      "extractionSpeed": 3
+    },
+    "abilities": [
+      {
+        "name": "Antler Charge",
+        "slug": "antler_charge",
+        "type": "active",
+        "description": "This Toon uses his antlers to quickly charge forward in a short burst, increasing his movement speed for 0.4 seconds. Has a Cooldown of 23."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/rudie/skins/default.webp"
+      },
+      {
+        "id": "vintage",
+        "name": "Vintage",
+        "image": "/images/toons/rudie/skins/vintage.webp"
+      },
+      {
+        "id": "blue_bell",
+        "name": "Blue Bell",
+        "image": "/images/toons/rudie/skins/blue_bell.webp"
+      },
+      {
+        "id": "holly_jolly",
+        "name": "Holly Jolly",
+        "image": "/images/toons/rudie/skins/holly_jolly.webp"
+      },
+      {
+        "id": "snow_time",
+        "name": "Snow-Time",
+        "image": "/images/toons/rudie/skins/snow-time.webp"
+      },
+      {
+        "id": "golden_antlers",
+        "name": "Golden Antlers",
+        "image": "/images/toons/rudie/skins/golden_antlers.webp"
+      }
+    ]
+  },
+  {
+    "id": "dandy",
+    "name": "Dandy",
+    "category": "lethal",
+    "type": "lethal",
+    "event": null,
+    "releaseDate": "2023-12-16",
+    "description": "Dandy, full name Dandicus Dancifer, is the titular Toon and mascot of Dandy's World. He acts as a shopkeeper for Items purchasable in-between rounds, Toons, Gamepasses, and is a developer-exclusive playable character, though is also playable in Roleplay Mode as both a Toon, and a Twisted.",
+    "images": {
+      "avatar": "/images/toons/dandy/avatar.png",
+      "full": "/images/toons/dandy/full.png"
+    },
+    "stats": {
+      "health": 0,
+      "skillCheck": 5,
+      "movementSpeed": 5,
+      "stamina": 5,
+      "stealth": 5,
+      "extractionSpeed": 5
+    },
+    "abilities": [
+      {
+        "name": "Dandy's World",
+        "slug": "dandy_s_world",
+        "type": "passive",
+        "description": "The star of the show."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/dandy/skins/default.webp"
+      },
+      {
+        "id": "christmas",
+        "name": "Christmas",
+        "image": "/images/toons/dandy/skins/christmas.webp"
+      }
+    ]
+  },
+  {
+    "id": "dyle",
+    "name": "Dyle",
+    "category": "lethal",
+    "type": "lethal",
+    "event": null,
+    "releaseDate": "2025-08-08",
+    "description": "Dyle, full name Dyle Timesly, is one of the two Lethal Toons in Dandy's World, added on August 8, 2025, alongside  Brusha. He acts as a shopkeeper, selling cosmetics like UGC Items, Gamepasses, Stickers, and Toon Skins.",
+    "images": {
+      "avatar": "/images/toons/dyle/avatar.png",
+      "full": "/images/toons/dyle/full.png"
+    },
+    "stats": {
+      "health": 0,
+      "skillCheck": 5,
+      "movementSpeed": 5,
+      "stamina": 5,
+      "stealth": 5,
+      "extractionSpeed": 5
+    },
+    "abilities": [
+      {
+        "name": "Dyle's World",
+        "slug": "dyle_s_world",
+        "type": "passive",
+        "description": "The star of the show."
+      }
+    ],
+    "skins": [
+      {
+        "id": "default",
+        "name": "Default",
+        "image": "/images/toons/dyle/skins/default.webp"
+      },
+      {
+        "id": "holiday",
+        "name": "Holiday",
+        "image": "/images/toons/dyle/skins/holiday.webp"
+      }
+    ]
+  }
+]

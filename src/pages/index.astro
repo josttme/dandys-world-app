@@ -1,16 +1,34 @@
 ---
+// src/pages/index.astro
+import MainLayout from "@layouts/MainLayout.astro";
 
+// CONFIGURACIÓN DE RUTAS DEFAULT
+// Hardcodeamos esto para O(1) performance.
+// Si algún día Astro (el personaje) cambia de ID, solo actualizas aquí.
+const DESKTOP_TARGET = "/toon/main/astro?sort=name&dir=asc";
+const MOBILE_TARGET = "/toon?sort=name&dir=asc";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout title="Dandy's World Wiki">
+  <script define:vars={{ DESKTOP_TARGET, MOBILE_TARGET }}>
+    (function () {
+      // Lógica crítica en el cliente
+      // Usamos 'replace' para que el usuario no pueda volver atrás a esta pantalla de carga
+      const isMobile = window.innerWidth < 768;
+      const target = isMobile ? MOBILE_TARGET : DESKTOP_TARGET;
+
+      window.location.replace(target);
+    })();
+  </script>
+
+  {/* UI de Carga (Spinner) para una mejor UX mientras redirige */}
+  <div
+    class="flex h-screen flex-col items-center justify-center gap-4 bg-slate-900 text-slate-400"
+  >
+    <div
+      class="h-10 w-10 animate-spin rounded-full border-4 border-slate-700 border-t-yellow-400"
+    >
+    </div>
+    <p class="animate-pulse font-mono text-sm">Iniciando sistema...</p>
+  </div>
+</MainLayout>

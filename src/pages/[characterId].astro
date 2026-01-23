@@ -1,0 +1,23 @@
+---
+// src/pages/[characterId].astro
+import { getToons } from "@services/toonService";
+
+// 1. GENERAR RUTAS ESTÁTICAS
+// Le decimos a Astro: "Crea una página para cada ID que exista en la base de datos"
+export async function getStaticPaths() {
+  const allToons = getToons({}); // Obtenemos todos los personajes
+
+  return allToons.map((toon) => ({
+    params: { characterId: toon.id }, // La URL será /boxten
+    props: { toon }, // Le pasamos los datos del toon directamente
+  }));
+}
+
+// 2. RECUPERAR DATOS
+// Ya no hace falta buscar con .find(), porque 'getStaticPaths' nos pasó el toon correcto
+const { toon } = Astro.props;
+
+// 3. REDIRECCIÓN INMEDIATA
+// Si llegamos aquí, es porque el ID existe (si no, Astro hubiera mostrado 404)
+return Astro.redirect(`/${toon.type}/${toon.category}/${toon.id}`);
+---

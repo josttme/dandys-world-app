@@ -1,0 +1,31 @@
+---
+import { getToons } from "@services/toonService";
+
+export async function getStaticPaths() {
+  // Obtenemos todas las combinaciones únicas de Tipo/Categoría
+  const allToons = getToons({});
+
+  // Usamos un Set para evitar duplicados (ej: muchos 'toon/main')
+  const paths = [];
+  const seen = new Set();
+
+  for (const toon of allToons) {
+    const key = `${toon.type}/${toon.category}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      paths.push({
+        params: { type: toon.type, category: toon.category },
+        // Pasamos el PRIMER toon que encontramos de esta categoría para redirigir a él
+        props: { firstToonId: toon.id },
+      });
+    }
+  }
+  return paths;
+}
+
+const { type, category } = Astro.params;
+const { firstToonId } = Astro.props;
+
+// Redirección automática al primer personaje de la lista
+return Astro.redirect(`/${type}/${category}/${firstToonId}`);
+---
