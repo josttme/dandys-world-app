@@ -1,72 +1,83 @@
-// src/components/CharacterList.tsx
-import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useState, useEffect } from "react";
 import { useCharacterFilters } from "@/hooks/useCharacterFilters";
-import type { Toon } from "@/types"; // Asegúrate de importar Toon, no Character
-import CharacterFilters from "./CharacterFilters";
-
-import { getToons } from "@services/toonService";
-
+import { CharacterFilters } from "./CharacterFilters";
 import CharacterCard from "./CharacterCard";
+
+// ==========================================
+// CUSTOM HOOK: SCROLL RESTORATION
+// ==========================================
+// Extraemos la lógica compleja de scroll para no ensuciar el componente principal
+const useScrollPersist = (storageKey: string, activeId: string) => {
+  const listRef = useRef<HTMLDivElement>(null);
+  const scrollPosRef = useRef<number>(0); // RAM (Desktop instantáneo)
+
+  // 1. Guardar Scroll al moverse
+  const handleScroll = () => {
+    if (listRef.current) {
+      const pos = listRef.current.scrollTop;
+      scrollPosRef.current = pos;
+      sessionStorage.setItem(storageKey, pos.toString());
+    }
+  };
+
+  // 2. Restaurar al montar (Móvil / Refresh)
+  useLayoutEffect(() => {
+    const savedPos = sessionStorage.getItem(storageKey);
+    if (savedPos && listRef.current) {
+      const pos = parseInt(savedPos, 10);
+      if (pos > 0) listRef.current.scrollTop = pos;
+    }
+  }, []);
+
+  // 3. Estabilizar al cambiar selección (Desktop)
+  useLayoutEffect(() => {
+    if (listRef.current && scrollPosRef.current > 0) {
+      listRef.current.scrollTop = scrollPosRef.current;
+    }
+  }, [activeId]);
+
+  return { listRef, handleScroll };
+};
+
+// ==========================================
+// COMPONENTE PRINCIPAL
+// ==========================================
 
 interface CharacterListProps {
   initialId?: string;
-  filterByType?: string;
-  initialData?: Toon[];
+  filterByType?: string; // "toon" | "twisted"
 }
+
 const CharacterList = ({
   initialId = "",
   filterByType = "toon",
-  initialData,
 }: CharacterListProps) => {
-  // --- 1. ESTADOS DE FILTROS ---
-  /*   const [sortOrder, setSortOrder] = useState<SortField>("default");
-  const [isAscending, setIsAscending] = useState(true);
-  const [activeFilter, setActiveFilter] = useState<boolean | undefined>(
-    undefined
-  ); */
+  // 1. CONTROLADOR DE LÓGICA (Nuestro hook refactorizado)
+  // Nota: El hook ya se encarga de cargar los datos internamente via getToons()
+  const controller = useCharacterFilters();
 
-  // 2. CONEXIÓN CON EL HOOK (Lógica de Negocio)
-  // Aquí obtenemos 'filters' del hook. Si el hook fallara, filters sería undefined.
+  // Pequeño hack: Como el hook trae TODOS los toons, filtramos por 'type' aquí
+  // o idealmente, le enseñamos al hook a filtrar por type.
+  // Por ahora, lo haremos aquí para no romper la arquitectura del hook genérico.
+  const displayToons = controller.toons.filter((t) => t.type === filterByType);
 
-  // 1. CORRECCIÓN DEL ERROR DE HIDRATACIÓN
-  // Inicializamos DIRECTAMENTE con lo que manda el servidor.
-  // Ya no usamos 'window' aquí. Así Server y Client coinciden al 100%.
+  // 2. ESTADO DE SELECCIÓN ACTIVA
   const [activeId, setActiveId] = useState(initialId);
 
-  // --- 2. SISTEMA DE SCROLL (REFS) ---
-  const listRef = useRef<HTMLDivElement>(null);
-  // Memoria RAM: Para Desktop (Persist)
-  const scrollPosRef = useRef<number>(0);
-  // Clave única para guardar en disco: Para Móvil (Restore)
-  const storageKey = `scroll-pos-${filterByType}`;
-
-  // --- 3. LECTURA DE URL (Inits) ---
-  /*   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const urlSort = params.get("sort") as SortField;
-    const urlDir = params.get("dir");
-    const urlActive = params.get("activeOnly");
-
-    if (urlSort) setSortOrder(urlSort);
-    if (urlDir === "desc") setIsAscending(false);
-    if (urlActive === "true") setActiveFilter(true);
-  }, []);
- */
-  // --- 4. ESCUCHA DE NAVEGACIÓN (Para actualizar borde verde en Desktop) ---
-  // 3. LISTENERS DE NAVEGACIÓN (Para actualizar DESPUÉS del primer render)
+  // Listener para actualizar la selección al navegar
   useEffect(() => {
     const updateActiveId = () => {
+      // Extraemos el ID de la URL de forma segura
       const parts = window.location.pathname.split("/");
-      // Asumimos que el ID es el último segmento
-      const currentId = parts[parts.length - 1];
+      const currentId = parts.pop() || ""; // Obtiene el último segmento
       setActiveId(currentId);
     };
 
-    // Escuchar cambios de página de Astro
     document.addEventListener("astro:page-load", updateActiveId);
-
-    // 🔥 IMPORTANTE: También sincronizar si el usuario usa las flechas del navegador (popstate)
     window.addEventListener("popstate", updateActiveId);
+
+    // Inicializar al montar
+    updateActiveId();
 
     return () => {
       document.removeEventListener("astro:page-load", updateActiveId);
@@ -74,119 +85,48 @@ const CharacterList = ({
     };
   }, []);
 
-  // --- 5. OBTENCIÓN DE DATOS ---
-  /*   const filteredToons = useMemo(() => {
-    const allToons = getToons({
-      sortBy: sortOrder,
-      sortDirection: isAscending ? "asc" : "desc",
-      hasActiveAbility: activeFilter,
-    });
-    return allToons.filter((t) => t.type === filterByType);
-  }, [filterByType, sortOrder, isAscending, activeFilter]);
- */
-  // --- 6. GENERACIÓN DE QUERY STRING ---
-  /*   const currentQueryParams = useMemo(() => {
-    const params = new URLSearchParams();
-    if (sortOrder !== "default") params.set("sort", sortOrder);
-    if (!isAscending) params.set("dir", "desc");
-    if (activeFilter) params.set("activeOnly", "true");
-    const str = params.toString();
-    return str ? `?${str}` : "";
-  }, [sortOrder, isAscending, activeFilter]);
- */
-  // --- 7. MANEJADOR DE SCROLL ---
-  // Guarda en DOS lugares: RAM (para persistencia inmediata) y Disco (para recargas/móvil)
-  const handleScroll = () => {
-    if (listRef.current) {
-      const pos = listRef.current.scrollTop;
-      scrollPosRef.current = pos; // Actualizamos RAM
-      sessionStorage.setItem(storageKey, pos.toString()); // Actualizamos Disco
-    }
-  };
+  // 3. SCROLL RESTORATION (Encapsulado)
+  const { listRef, handleScroll } = useScrollPersist(
+    `scroll-pos-${filterByType}`,
+    activeId
+  );
 
-  // --- 8. EFECTO A: RESTAURACIÓN (SOLO MÓVIL / PRIMER MONTAJE) ---
-  // Este se ejecuta SOLO cuando el componente nace (mount).
-  // En Desktop con persist, esto corre UNA sola vez y no molesta más.
-  // En Móvil, corre cada vez que vuelves de la página de detalle.
-  // 5. RESTAURACIÓN MÓVIL (Fix para que funcione tras arreglar hidratación)
-  useLayoutEffect(() => {
-    const savedPos = sessionStorage.getItem(storageKey);
-    // Solo restauramos si NO hay persistencia en RAM (indicador de que es un montaje nuevo/móvil)
-    // o si estamos en móvil y listRef acaba de nacer.
-    if (savedPos && listRef.current) {
-      const posNumber = parseInt(savedPos, 10);
-      if (posNumber > 0) {
-        listRef.current.scrollTop = posNumber;
-      }
-    }
-  }, []); // Solo al montar
-  // --- 9. EFECTO B: ESTABILIZACIÓN (SOLO DESKTOP / NAVEGACIÓN) ---
-  // Este arregla el parpadeo en Desktop. Se ejecuta cada vez que cambia el seleccionado.
-  // Ignora el sessionStorage y confía ciegamente en la RAM (scrollPosRef) que es más fresca.
-  useLayoutEffect(() => {
-    if (listRef.current && scrollPosRef.current > 0) {
-      // "Golpeamos" el scroll para que vuelva a donde estaba en la RAM
-      // por si el navegador intentó moverlo al cambiar el borde verde.
-      listRef.current.scrollTop = scrollPosRef.current;
-    }
-  }, [activeId]); // Solo cuando cambia la selección
-
-  // 1. OBTENCIÓN DE DATOS
-  const [baseData, setBaseData] = useState<Toon[]>(initialData || []);
-
-  useEffect(() => {
-    if (!initialData) {
-      // Si no vienen de Astro, los pedimos al servicio
-      // Asegúrate que getToons acepte los parámetros correctamente según tu servicio
-      const data = getToons({ type: filterByType });
-      setBaseData(data);
-    }
-  }, [initialData, filterByType]);
-
-  // 2. CONEXIÓN CON EL HOOK (Lógica de Negocio)
-  // Aquí obtenemos 'filters' del hook. Si el hook fallara, filters sería undefined.
-  const {
-    toons: filteredToons, // Renombramos para claridad
-    filters, // <--- ESTE ES EL OBJETO QUE FALTABA
-    queryString,
-    setFilters,
-    sortOrder,
-    setSortOrder,
-    isAscending,
-    toggleSortDirection,
-    handleReset,
-  } = useCharacterFilters(baseData);
-
-  // --- RENDER ---
   return (
     <div className="flex h-full flex-col">
-      <div className="flex-none">
-        <CharacterFilters
-          filters={filters}
-          onFilterChange={setFilters}
-          sortOrder={sortOrder}
-          onSortChange={setSortOrder}
-          isAscending={isAscending}
-          onDirectionToggle={toggleSortDirection}
-          onReset={handleReset}
-        />
+      {/* HEADER FILTROS */}
+      <div className="flex-none px-1 pt-1">
+        <CharacterFilters controller={controller} />
       </div>
 
+      {/* LISTA SCROLLEABLE */}
       <div
         ref={listRef}
         onScroll={handleScroll}
-        className="h-full flex-1 overflow-hidden overflow-y-auto pr-2"
+        className="custom-scrollbar flex-1 overflow-x-hidden overflow-y-auto px-1 pb-20"
+        // Tip: custom-scrollbar es una clase útil si la tienes en CSS global
       >
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
-          {filteredToons.map((toon) => (
-            // Pasamos el objeto toon completo al componente hijo
-            <CharacterCard
-              key={toon.id}
-              character={toon}
-              isActive={toon.id === initialId} // Le decimos si está seleccionado
-              currentParams={queryString}
-            />
-          ))}
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-5">
+          {displayToons.length > 0 ? (
+            displayToons.map((toon) => (
+              <CharacterCard
+                key={toon.id}
+                character={toon}
+                isActive={toon.id === activeId}
+                currentParams={controller.queryString}
+              />
+            ))
+          ) : (
+            // ESTADO VACÍO (Empty State) - Vital para UX
+            <div className="col-span-full py-10 text-center text-slate-500">
+              <p>No se encontraron personajes con estos filtros.</p>
+              <button
+                onClick={controller.resetFilters}
+                className="mt-2 text-yellow-500 hover:underline"
+              >
+                Limpiar filtros
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
