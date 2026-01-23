@@ -1,30 +1,80 @@
 import rawData from "@data/characters.json";
-import { CATEGORY_ORDER } from "@config/consts";
-// Importamos los tipos desde el archivo que acabamos de crear
-// Ajusta la ruta "../types" según tu estructura de carpetas real
-import type { Toon, ToonCategory, FilterOptions, ToonStats } from "@/types";
+import type {
+  Toon,
+  ToonCategory,
+  FilterOptions,
+  ToonStats,
+  SortField,
+  SortDirection,
+  ToonSkin,
+} from "@/types";
 
 // ==========================================
-// 1. EL MAPPER (Transformación de Datos)
+// 1. CONFIGURACIÓN Y CONSTANTES
 // ==========================================
 
-const mapToon = (raw: any): Toon => {
+const NEW_RELEASE_THRESHOLD_DAYS = 30;
+
+// Definimos la prioridad explícita para cada categoría (para ordenamiento)
+const CATEGORY_PRIORITY: Record<ToonCategory, number> = {
+  main: 10,
+  normal: 20,
+  twisted: 30,
+  lethal: 40,
+  event: 50,
+};
+
+// ==========================================
+// 2. TIPOS INTERNOS (Raw Data)
+// ==========================================
+
+/**
+ * Representa la estructura cruda del JSON.
+ * Esto nos protege de acceder a propiedades que no existen en rawData.
+ */
+interface RawToonAttributes {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  type?: string;
+  event?: string;
+  releaseDate?: string;
+  images: { avatar: string; full: string };
+  stats: Record<string, number | string>; // El JSON suele traer strings numéricos
+  abilities?: Array<{ name: string; type: string; description: string }>;
+  skins?: Array<{ name: string; image: string; description?: string }>;
+}
+
+// ==========================================
+// 3. MAPPER (Transformación Data Layer -> Domain Layer)
+// ==========================================
+
+const mapToon = (raw: RawToonAttributes): Toon => {
+  // Conversión segura de categoría
   const categoryLower = raw.category.toLowerCase() as ToonCategory;
 
-  // Lógica para determinar si es "Nuevo" (ej: lanzado en los últimos 30 días)
+  // Lógica de fecha: ¿Es un lanzamiento reciente?
   const isNew = raw.releaseDate
-    ? (new Date().getTime() - new Date(raw.releaseDate).getTime()) /
-        (1000 * 3600 * 24) <
-      30
+    ? (Date.now() - new Date(raw.releaseDate).getTime()) / (1000 * 3600 * 24) <
+      NEW_RELEASE_THRESHOLD_DAYS
     : false;
+
+  // Mapeo de Skins seguro
+  const skins: ToonSkin[] = (raw.skins || []).map((skin) => ({
+    name: skin.name,
+    image: skin.image,
+    description: skin.description,
+  }));
 
   return {
     id: raw.id,
     name: raw.name,
     description: raw.description,
     category: categoryLower,
+    // Capitalización simple para la UI
     categoryLabel: raw.category.charAt(0).toUpperCase() + raw.category.slice(1),
-    type: raw.type ? raw.type.toLowerCase() : "toon",
+    type: raw.type?.toLowerCase() || "toon",
     event: raw.event || null,
     releaseDate: raw.releaseDate || null,
     isNew,
@@ -32,124 +82,125 @@ const mapToon = (raw: any): Toon => {
       avatar: raw.images.avatar,
       full: raw.images.full,
     },
+    // Conversión explícita a números para evitar bugs matemáticos
     stats: {
-      health: Number(raw.stats.health),
-      movementSpeed: Number(raw.stats.movementSpeed),
-      skillCheck: Number(raw.stats.skillCheck),
-      stamina: Number(raw.stats.stamina),
-      stealth: Number(raw.stats.stealth),
-      extractionSpeed: Number(raw.stats.extractionSpeed),
+      health: Number(raw.stats.health || 0),
+      movementSpeed: Number(raw.stats.movementSpeed || 0),
+      skillCheck: Number(raw.stats.skillCheck || 0),
+      stamina: Number(raw.stats.stamina || 0),
+      stealth: Number(raw.stats.stealth || 0),
+      extractionSpeed: Number(raw.stats.extractionSpeed || 0),
     },
-    abilities: raw.abilities || [],
-    skins: raw.skins || [],
-    // Pre-calculamos esto para no hacerlo en cada render
+    abilities: (raw.abilities || []).map((ab) => ({
+      ...ab,
+      type: ab.type.toLowerCase() as "active" | "passive", // Casteo seguro
+    })),
+    skins,
+    // Computed Property: Optimización para filtros rápidos
     hasActiveAbility:
-      raw.abilities?.some((ab: any) => ab.type.toLowerCase() === "active") ??
-      false,
+      raw.abilities?.some((ab) => ab.type.toLowerCase() === "active") ?? false,
   };
 };
 
-// Cacheamos la lista limpia para no re-mapear en cada filtro
-const ALL_TOONS: Toon[] = rawData.map(mapToon);
+// Singleton: Procesamos la data una sola vez al cargar la app
+// Asumimos que rawData es 'unknown' y lo casteamos al procesar
+const ALL_TOONS: Toon[] = (rawData as unknown as RawToonAttributes[]).map(
+  mapToon
+);
 
 // ==========================================
-// OPTIMIZACIÓN PREVIA (Fuera de la función)
+// 4. LOGICA DE ORDENAMIENTO (Isolated)
 // ==========================================
 
-// 1. Mapa de Prioridad de Categorías O(1)
-// En lugar de buscar en un array con .indexOf (lento), usamos un objeto (instantáneo).
-// Tip: Asegúrate de que las claves coincidan con tus datos (minúsculas).
-const CATEGORY_PRIORITY: Record<string, number> = {
-  main: 0,
-  normal: 1,
-  twisted: 2,
-  // ... resto de categorías
+const getComparator = (
+  sortField: SortField | "default",
+  direction: SortDirection
+) => {
+  const modifier = direction === "asc" ? 1 : -1;
+
+  return (a: Toon, b: Toon): number => {
+    // A. Ordenamiento por Defecto (Categoría -> Nombre)
+    if (sortField === "default") {
+      const priorityA = CATEGORY_PRIORITY[a.category] ?? 99;
+      const priorityB = CATEGORY_PRIORITY[b.category] ?? 99;
+
+      if (priorityA !== priorityB) return priorityA - priorityB;
+      return a.name.localeCompare(b.name);
+    }
+
+    // B. Ordenamiento por Fecha
+    if (sortField === "releaseDate") {
+      if (!a.releaseDate) return 1; // Sin fecha al final
+      if (!b.releaseDate) return -1;
+      return a.releaseDate.localeCompare(b.releaseDate) * modifier;
+    }
+
+    // C. Ordenamiento por Nombre
+    if (sortField === "name") {
+      return a.name.localeCompare(b.name) * modifier;
+    }
+
+    // D. Ordenamiento por Estadísticas (Numérico)
+    // TypeScript sabe que si no es nombre ni fecha, es keyof ToonStats
+    const statKey = sortField as keyof ToonStats;
+    const statA = a.stats[statKey] || 0;
+    const statB = b.stats[statKey] || 0;
+
+    return (statA - statB) * modifier;
+  };
 };
 
+// ==========================================
+// 5. SERVICIO PRINCIPAL
+// ==========================================
+
 export const getToons = (options: FilterOptions = {}): Toon[] => {
-  // Usamos spread para no mutar el array original, bien hecho.
   let result = [...ALL_TOONS];
 
-  // --- FASE 1: FILTRADO (Tu código estaba perfecto aquí) ---
+  // --- FILTRADO ---
+
+  // 1. Búsqueda de Texto
   if (options.searchTerm) {
     const term = options.searchTerm.toLowerCase();
     result = result.filter((toon) => toon.name.toLowerCase().includes(term));
   }
 
-  if (options.categories && options.categories.length > 0) {
+  // 2. Categorías (Multiselect)
+  if (options.categories?.length) {
     result = result.filter((toon) =>
       options.categories!.includes(toon.category)
     );
   }
 
+  // 3. Habilidad Activa
   if (options.hasActiveAbility !== undefined) {
     result = result.filter(
       (toon) => toon.hasActiveAbility === options.hasActiveAbility
     );
   }
 
+  // 4. Estadísticas Mínimas
   if (options.stats) {
-    Object.entries(options.stats).forEach(([statKey, minValue]) => {
-      const key = statKey as keyof ToonStats;
+    Object.entries(options.stats).forEach(([key, minValue]) => {
+      const statKey = key as keyof ToonStats;
       if (typeof minValue === "number") {
-        result = result.filter((toon) => toon.stats[key] >= minValue);
+        result = result.filter((toon) => toon.stats[statKey] >= minValue);
       }
     });
   }
 
-  // --- FASE 2: ORDENAMIENTO OPTIMIZADO ---
+  // --- ORDENAMIENTO ---
 
   const sortField = options.sortBy || "default";
-  const direction = options.sortDirection || "asc";
+  const sortDirection = options.sortDirection || "asc";
 
-  // Micro-optimización: Resolvemos el multiplicador fuera
-  const modifier = direction === "asc" ? 1 : -1;
-
-  result.sort((a, b) => {
-    // A. Ordenamiento por Defecto (Categoría -> Nombre)
-    if (sortField === "default") {
-      // Búsqueda O(1) en el mapa estático. ¡Mucho más rápido!
-      const priorityA = CATEGORY_PRIORITY[a.category] ?? 999;
-      const priorityB = CATEGORY_PRIORITY[b.category] ?? 999;
-
-      if (priorityA !== priorityB) {
-        return priorityA - priorityB;
-      }
-      return a.name.localeCompare(b.name);
-    }
-
-    // B. Ordenamiento por Fecha (ISO STRING)
-    // Ya no usamos new Date(). Al ser "YYYY-MM-DD", la comparación de strings funciona matemáticamente.
-    if (sortField === "releaseDate") {
-      // Manejo de nulos: Si no hay fecha, lo mandamos al final
-      if (!a.releaseDate) return 1;
-      if (!b.releaseDate) return -1;
-
-      // localeCompare es suficiente para strings ISO
-      return a.releaseDate.localeCompare(b.releaseDate) * modifier;
-    }
-
-    // C. Ordenamiento por Estadísticas
-    // Verificamos si la key existe en stats de manera segura
-    if (sortField in a.stats) {
-      const statKey = sortField as keyof ToonStats;
-      // Resta simple numérica
-      return (a.stats[statKey] - b.stats[statKey]) * modifier;
-    }
-
-    // D. Ordenamiento por Nombre
-    if (sortField === "name") {
-      return a.name.localeCompare(b.name) * modifier;
-    }
-
-    return 0;
-  });
+  result.sort(getComparator(sortField, sortDirection));
 
   return result;
 };
 
 // ==========================================
-// 3. HELPERS EXPORTADOS
+// 6. HELPERS PÚBLICOS
 // ==========================================
 
 export const getToonById = (id: string): Toon | undefined => {
