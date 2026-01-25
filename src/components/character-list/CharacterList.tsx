@@ -4,6 +4,18 @@ import { CharacterFilters } from "./CharacterFilters";
 import CharacterCard from "./CharacterCard";
 
 // ==========================================
+// 1. COMPONENTE SKELETON (Estado de Carga)
+// ==========================================
+// Este componente simula visualmente una tarjeta mientras cargamos.
+// Evita el parpadeo de contenido incorrecto.
+const CharacterCardSkeleton = () => (
+  <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-700/50 bg-slate-800/40 p-4">
+    <div className="mb-3 h-20 w-20 animate-pulse rounded-xl bg-slate-700/50" />
+    <div className="h-4 w-24 animate-pulse rounded bg-slate-700/50" />
+  </div>
+);
+
+// ==========================================
 // CUSTOM HOOK: SCROLL RESTORATION
 // ==========================================
 // Extraemos la lógica compleja de scroll para no ensuciar el componente principal
@@ -73,11 +85,10 @@ const CharacterList = ({
       setActiveId(currentId);
     };
 
-    document.addEventListener("astro:page-load", updateActiveId);
-    window.addEventListener("popstate", updateActiveId);
-
     // Inicializar al montar
     updateActiveId();
+    document.addEventListener("astro:page-load", updateActiveId);
+    window.addEventListener("popstate", updateActiveId);
 
     return () => {
       document.removeEventListener("astro:page-load", updateActiveId);
@@ -106,7 +117,16 @@ const CharacterList = ({
         // Tip: custom-scrollbar es una clase útil si la tienes en CSS global
       >
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-5">
-          {displayToons.length > 0 ? (
+          {/* 🔥 LÓGICA DE CARGA INTELIGENTE (LA SOLUCIÓN) */}
+          {controller.isLoading ? (
+            // ESTADO A: CARGANDO (Mostramos 10 esqueletos)
+            // Esto le da tiempo a React para leer la URL y aplicar filtros
+            // ANTES de mostrar ningún personaje real incorrecto.
+            Array.from({ length: 10 }).map((_, i) => (
+              <CharacterCardSkeleton key={i} />
+            ))
+          ) : displayToons.length > 0 ? (
+            // ESTADO B: DATOS LISTOS (Renderizamos lo correcto)
             displayToons.map((toon) => (
               <CharacterCard
                 key={toon.id}
@@ -116,9 +136,9 @@ const CharacterList = ({
               />
             ))
           ) : (
-            // ESTADO VACÍO (Empty State) - Vital para UX
+            // ESTADO C: VACÍO (Sin resultados)
             <div className="col-span-full py-10 text-center text-slate-500">
-              <p>No se encontraron personajes con estos filtros.</p>
+              <p>No se encontraron personajes.</p>
               <button
                 onClick={controller.resetFilters}
                 className="mt-2 text-yellow-500 hover:underline"
