@@ -91,7 +91,7 @@ export default function CharacterDetail({ char }) {
 
   // Efecto: Si cambia el personaje (prop char), reseteamos la imagen principal
   useEffect(() => {
-    setCurrentImage(char.fullImage || char.avatar);
+    setCurrentImage(char.images.full || char.avatar);
     setIsExiting(false);
   }, [char]);
 
