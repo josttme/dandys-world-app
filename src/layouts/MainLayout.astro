@@ -1,75 +1,84 @@
 ---
 // src/layouts/MainLayout.astro
 import { ClientRouter } from "astro:transitions";
-const { title } = Astro.props;
 import "@styles/global.css";
+
+// 1. TYPED PROPS (TypeScript en Frontmatter)
+// Definimos explícitamente qué recibe el layout para autocompletado y seguridad.
+interface Props {
+  title: string;
+  description?: string;
+  image?: string; // Para compartir en redes (OG Image)
+}
+
+const {
+  title,
+  description = "Base de datos definitiva de Dandy's World: Toons, Twisted y Estrategias.",
+  image = "/images/og-default.jpg",
+} = Astro.props;
 ---
 
-<html lang="es">
+<html lang="es" class="dark">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    {/* 2. SEO & METADATOS (Vital para Discord/Twitter) */}
     <title>{title}</title>
+    <meta name="description" content={description} />
+
+    {/* Open Graph (Facebook/Discord) */}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    {/* Twitter Card */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    {
+      /* 3. FUENTES MODERNAS (Google Fonts)
+        - Rajdhani: Aspecto técnico/gaming para títulos.
+        - Inter: La mejor fuente para interfaces de usuario limpias.
+    */
+    }
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    {/* View Transitions de Astro */}
     <ClientRouter />
   </head>
+
   <body
-    class="m-0 overflow-hidden bg-[#202020] bg-[repeating-linear-gradient(-70deg,rgba(0,0,0,0.1)_0px,rgba(0,0,0,0.1)_50px,transparent_50px,transparent_100px)] p-0 font-sans text-white selection:bg-yellow-400 selection:text-black"
+    class="flex h-screen w-screen flex-col overflow-hidden bg-slate-950 font-sans text-slate-100 antialiased selection:bg-yellow-500/30 selection:text-yellow-200"
   >
+    {
+      /* 4. FONDO "GAMING" MEJORADO 
+        Usamos capas fijas (fixed) con z-index negativo para que el fondo no afecte al layout.
+        Tu gradiente repetitivo estaba bien, pero lo he suavizado para que no canse la vista.
+    */
+    }
+    <div class="fixed inset-0 -z-20 h-full w-full bg-[#151515]"></div>
+    <div
+      class="fixed inset-0 -z-10 h-full w-full bg-[repeating-linear-gradient(-45deg,rgba(255,255,255,0.03)_0px,rgba(255,255,255,0.03)_1px,transparent_1px,transparent_10px)]"
+    >
+    </div>
+
+    {/* Efecto viñeta para centrar la atención */}
+    <div
+      class="pointer-events-none fixed inset-0 -z-10 bg-linear-to-t from-slate-950/80 via-transparent to-slate-950/80"
+    >
+    </div>
+
+    {/* SLOT PRINCIPAL */}
     <slot />
   </body>
 </html>
-
-<!-- ---
-import Sidebar from "@components/sidebar/Sidebar";
-import CharacterList from "@components/character-list/CharacterList";
-import { CATEGORY_ORDER } from "@config/consts";
-import { ClientRouter } from "astro:transitions";
-import "@styles/global.css";
-
-const { title, char, type, category } = Astro.props;
-
-const currentType = type || "toon";
-
-const activeCategory = category
-  ? category.toLowerCase()
-  : CATEGORY_ORDER[0].toLowerCase();
-
-const mobileDetailClass = char
-  ? "fixed inset-0 z-50 flex w-full h-full md:static md:z-0 md:flex-1"
-  : "hidden md:flex md:flex-1";
----
-
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{title} | Dandy's World</title>
-    <ClientRouter />
-  </head>
-  <body
-    class="m-0 bg-[#202020] bg-[repeating-linear-gradient(-70deg,rgba(0,0,0,0.1)_0px,rgba(0,0,0,0.1)_50px,transparent_50px,transparent_100px)] p-0 font-sans text-white selection:bg-yellow-400 selection:text-black lg:overflow-hidden"
-  >
-    <div class="flex h-screen w-screen flex-col md:flex-row">
-      <Sidebar client:load filter={currentType} />
-
-      <CharacterList
-        client:load
-        transition:persist
-        transition:name="character-list-grid"
-        category={category}
-        selectedChar={char}
-      />
-
-      <div class={mobileDetailClass}>
-        <slot />
-         {
-          !char && (
-            <div class="hidden h-full w-full items-center justify-center text-white/20 md:flex">
-              <span class="animate-pulse">Seleccionando...</span>
-            </div>
-          )
-        }
-      </div>
-    </div>
-  </body>
-</html> -->
