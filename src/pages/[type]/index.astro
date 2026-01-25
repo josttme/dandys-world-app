@@ -1,53 +1,45 @@
 ---
 // src/pages/[type]/index.astro
-import MainLayout from "@layouts/MainLayout.astro";
-import CharacterList from "@components/character-list/CharacterList";
-import { getToons } from "@services/toonService";
+import MainLayout from "@/layouts/MainLayout.astro";
+import CharacterList from "@/components/character-list/CharacterList";
+import { getToons } from "@/services/toonService";
 
 export async function getStaticPaths() {
   const allToons = getToons({});
+  // Set para obtener tipos únicos ('toon', 'twisted')
   const types = [...new Set(allToons.map((t) => t.type))];
 
-  return types.map((type) => {
-    const firstToon = allToons.find((t) => t.type === type);
-    return {
-      params: { type },
-      props: { firstToon },
-    };
-  });
+  return types.map((type) => ({
+    params: { type },
+  }));
 }
 
 const { type } = Astro.params;
-const { firstToon } = Astro.props;
 
-const desktopTarget = `/${firstToon.type}/${firstToon.category}/${firstToon.id}`;
+// Validamos que 'type' sea un string válido, si no typescript se queja
+const filterType = typeof type === "string" ? type : "toon";
+
+// Opcional: Seleccionamos el primero de este tipo por si queremos pre-selección
+const toonsOfType = getToons({ categories: [], searchTerm: "" }).filter(
+  (t) => t.type === filterType
+);
+const firstToonId = toonsOfType[0]?.id;
 ---
 
-<MainLayout title={`Lista de ${type}`}>
-  <script define:vars={{ desktopTarget }}>
-    if (window.innerWidth >= 768) {
-      window.location.replace(desktopTarget);
-    }
-  </script>
-
-  {/* SOLUCIÓN AL SCROLL MÓVIL */}
-  {
-    /* 1. h-screen + overflow-hidden: Congelamos la pantalla para que no se mueva el body */
-  }
-  <div class="flex h-screen w-full flex-col overflow-hidden bg-slate-900">
-    {/* 2. Cabecera Fija (flex-none): El título se queda quieto arriba */}
-    <div class="z-10 flex-none border-b border-slate-800 bg-slate-900 p-4 pb-2">
-      <h1 class="text-2xl font-bold text-white capitalize">
-        Personajes: <span class="text-blue-400">{type}</span>
-      </h1>
-    </div>
-
-    {/* 3. Contenedor de la Lista (flex-1): Ocupa TODO el espacio restante */}
+<MainLayout title={`Personajes tipo: ${filterType}`}>
+  <main
+    class="h-[calc(100vh-(--spacing(16)))] w-full overflow-hidden bg-slate-950"
+  >
     {
-      /* 'min-h-0' es un truco crucial de Flexbox para permitir el scroll interno en hijos */
+      /* REUTILIZACIÓN TOTAL:
+      Usamos el mismo componente que en la Home, pero le pasamos
+      el filtro 'filterByType' fijo desde la URL.
+    */
     }
-    <div class="min-h-0 flex-1 p-4 pt-2">
-      <CharacterList filterByType={type} initialId="" client:visible />
-    </div>
-  </div>
+    <CharacterList
+      client:load
+      filterByType={filterType}
+      initialId={firstToonId}
+    />
+  </main>
 </MainLayout>

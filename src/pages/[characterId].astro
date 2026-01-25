@@ -1,23 +1,23 @@
 ---
 // src/pages/[characterId].astro
-import { getToons } from "@services/toonService";
+import { getToons } from "@/services/toonService";
+import type { Toon } from "@/types";
 
-// 1. GENERAR RUTAS ESTÁTICAS
-// Le decimos a Astro: "Crea una página para cada ID que exista en la base de datos"
 export async function getStaticPaths() {
-  const allToons = getToons({}); // Obtenemos todos los personajes
+  const allToons = getToons({});
 
   return allToons.map((toon) => ({
-    params: { characterId: toon.id }, // La URL será /boxten
-    props: { toon }, // Le pasamos los datos del toon directamente
+    params: { characterId: toon.id },
+    props: { toon },
   }));
 }
 
-// 2. RECUPERAR DATOS
-// Ya no hace falta buscar con .find(), porque 'getStaticPaths' nos pasó el toon correcto
+interface Props {
+  toon: Toon;
+}
+
 const { toon } = Astro.props;
 
-// 3. REDIRECCIÓN INMEDIATA
-// Si llegamos aquí, es porque el ID existe (si no, Astro hubiera mostrado 404)
-return Astro.redirect(`/${toon.type}/${toon.category}/${toon.id}`);
+// Redirección permanente (301) es mejor para SEO que 302
+return Astro.redirect(`/${toon.type}/${toon.category}/${toon.id}`, 301);
 ---
