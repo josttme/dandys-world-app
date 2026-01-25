@@ -74,7 +74,7 @@ export default function CharacterCard({
       </div>
 
       {/* NOMBRE */}
-      <h3 className="w-full truncate text-sm font-bold text-slate-200 transition-colors group-hover:text-yellow-400">
+      <h3 className="font-display text-lg font-bold tracking-wide text-slate-100 uppercase">
         {character.name}
       </h3>
 
