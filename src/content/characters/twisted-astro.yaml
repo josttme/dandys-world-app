@@ -1,0 +1,40 @@
+id: "twisted-astro"
+code: "TW-04" # Nuevo código (si ya lo implementaste)
+name: "Twisted Astro"
+releaseDate: 2024-06-14 # Misma fecha o posterior
+category: "Twisted"
+type: "Main" # O lo que aplique
+gender: "Male"
+
+assets:
+  # Usa la misma imagen por ahora si no tienes la versión twisted
+  avatar: "./assets/astro-avatar.png"
+  fullBody: "./assets/astro-full.png"
+
+stats:
+  ratings:
+    health: 4
+    skillCheck: 1
+    movementSpeed: 4
+    stamina: 5
+    stealth: 1
+    extractionSpeed: 1
+  raw:
+    healthPoints: 2
+    staminaPoints: 150
+    walkSpeed: 15
+    sprintSpeed: 25
+
+abilities:
+  - name: "Corrupted Lullaby"
+    slug: "corrupted_lullaby"
+    type: "Passive"
+    description: "Emite un aura que drena la estamina de los Toons cercanos."
+    icon: "./assets/icons/nap-time.webp" # Usa placeholder
+
+unlock:
+  purchasable: false # Los twisted generalmente no se compran con Ichor así
+  currency: "Ichor"
+
+description: "A horrifying, corrupted version of Astro. His music box mechanism is broken, playing a distorted tune that alerts everyone nearby."
+# IMPORTANTE: El Twisted NO tiene "relatedTwisted" (para evitar bucles infinitos por ahora)

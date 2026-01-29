@@ -1,0 +1,64 @@
+id: "astro"
+code: "MN-01"
+name: "Astro"
+category: "Main"
+type: "Toon"
+releaseDate: 2024-06-14
+gender: "Male"
+description: "Astro, full name Astro Novalite, is one of the 38 playable Toons in Dandy's World. He was introduced on June 14, 2024."
+assets:
+  avatar: "./assets/astro-avatar.png"
+  fullBody: "./assets/astro-full.png"
+
+stats:
+  ratings:
+    health: 2
+    skillCheck: 2
+    movementSpeed: 3
+    stamina: 3
+    stealth: 5
+    extractionSpeed: 3
+  raw:
+    healthPoints: 2
+    staminaPoints: 150
+    walkSpeed: 15
+    sprintSpeed: 25
+
+abilities:
+  - name: "Nap Time"
+    slug: "nap_time"
+    type: "Active"
+    description: "Crea un pulso que restaura completamente la Stamina de los Toons cercanos."
+    cooldown: 60
+    icon: "./assets/icons/nap-time.webp"
+  - name: "Well Rested"
+    slug: "well_rested"
+    type: "Passive"
+    description: "Regenera Stamina 50% más rápido y ve Toons con baja stamina."
+
+unlock:
+  purchasable: true
+  cost: 5000
+  currency: "Ichor"
+  requirements:
+    - type: "Research"
+      target: "Twisted Astro"
+      value: 100
+      description: "100% Research on Twisted Astro"
+    - type: "Encounter"
+      target: "Twisted Dandy"
+      description: "Encounter Twisted Dandy"
+
+mastery:
+  tasks:
+    - description: "Usa la habilidad activa"
+      count: 100
+      progressType: "Use"
+    - description: "Recorre metros"
+      count: 150000
+      progressType: "Run"
+  reward:
+    skinName: "Vintage Astro"
+
+# Aquí ocurre la magia de las referencias
+relatedTwisted: "twisted-astro"
