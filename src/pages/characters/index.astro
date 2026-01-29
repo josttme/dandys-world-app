@@ -1,0 +1,46 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CharacterCard from "../../components/characters/CharacterCard.astro";
+import { getCollection } from "astro:content";
+
+// 1. Obtener datos
+const characters = await getCollection("characters");
+
+// 2. Ordenar por fecha (opcional)
+const sortedCharacters = characters.sort((a, b) => {
+  return a.data.releaseDate.valueOf() - b.data.releaseDate.valueOf();
+});
+---
+
+<Layout title="Personajes | Dandy's World Wiki">
+  <main class="mx-auto max-w-7xl p-8">
+    <header class="mb-12 text-center">
+      <h1
+        class="mb-4 bg-linear-to-r from-yellow-400 to-orange-500 bg-clip-text text-5xl font-black text-transparent"
+      >
+        DATABASE
+      </h1>
+      <p class="text-gray-400">
+        Selecciona un archivo para ver detalles clasificados.
+      </p>
+    </header>
+
+    {/* Si no hay personajes, muestra un aviso bonito */}
+    {
+      characters.length === 0 ? (
+        <div class="rounded border border-red-500 bg-red-900/20 p-10 text-center">
+          <p class="text-red-200">
+            No se encontraron datos en src/content/characters/
+          </p>
+        </div>
+      ) : (
+        /* GRID RESPONSIVA */
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {sortedCharacters.map((char) => (
+            <CharacterCard character={char} />
+          ))}
+        </div>
+      )
+    }
+  </main>
+</Layout>
