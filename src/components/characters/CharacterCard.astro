@@ -1,0 +1,146 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import StatBar from "../ui/StatBar.astro";
+
+// 2. Definir la interfaz Props.
+// Astro busca automáticamente una interfaz llamada 'Props' en el frontmatter.
+interface Props {
+  // Aquí decimos: "esta prop debe ser OBLIGATORIAMENTE un ítem de la colección 'characters'"
+  character: CollectionEntry<"characters">;
+}
+
+// 3. Destructurar con tipado inferido
+// Al poner esto, TypeScript ya sabe que 'character' tiene la forma de tu Schema Zod.
+const { character } = Astro.props;
+const { data, id } = character;
+
+// PRUEBA: Si escribes ahora "data.", debería salirte "stats", "name", etc.
+// Tipado estricto: Este componente SOLO acepta un personaje válido
+interface Props {
+  character: CollectionEntry<"characters">;
+}
+
+// Mapeo de colores según el rol (Game Design UI)
+const roleColors: Record<string, string> = {
+  Main: "border-blue-500/50 shadow-blue-900/20",
+  Toon: "border-green-500/50 shadow-green-900/20",
+  Twisted: "border-red-500/50 shadow-red-900/20",
+};
+
+const borderColor = roleColors[data.category] || "border-gray-700";
+---
+
+<article
+  class="group relative overflow-hidden rounded-xl border border-gray-700 bg-gray-900/80 backdrop-blur-md transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl"
+>
+  {/* Borde brillante dinámico según el tipo de personaje */}
+  <div
+    class={`absolute inset-0 border-2 ${borderColor} rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10`}
+  >
+  </div>
+
+  {/* Header de la Carta */}
+  <div
+    class="relative flex h-48 items-center justify-center overflow-hidden bg-linear-to-b from-gray-800 to-gray-900 p-4"
+  >
+    {/* Fondo abstracto decorativo */}
+    <div class="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10">
+    </div>
+
+    {/* IMAGEN OPTIMIZADA: Astro procesa esto automáticamente */}
+    <div
+      class="relative z-10 transition-transform duration-500 group-hover:scale-110"
+    >
+      <Image
+        src={data.assets.avatar}
+        alt={data.name}
+        width={150}
+        height={150}
+        class="drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]"
+      />
+    </div>
+
+    {/* Badge de Categoría */}
+    <span
+      class="absolute top-3 right-3 rounded border border-gray-600 bg-black/60 px-2 py-1 text-[10px] font-bold text-white uppercase backdrop-blur"
+    >
+      {data.category}
+    </span>
+  </div>
+
+  {/* Cuerpo de la Carta */}
+  <div class="p-5">
+    <div class="mb-4 flex items-baseline justify-between">
+      <h2
+        class="text-2xl font-black tracking-tighter text-white uppercase transition-colors group-hover:text-yellow-400"
+      >
+        {data.name}
+      </h2>
+      <span class="font-mono text-xs text-gray-500">{data.gender}</span>
+    </div>
+
+    {/* Sección de Stats - Usando nuestro componente atómico */}
+    <div
+      class="mb-6 space-y-1 rounded-lg border border-white/5 bg-black/20 p-3"
+    >
+      <StatBar
+        label="Health"
+        value={data.stats.ratings.health}
+        color="bg-red-500"
+      />
+      <StatBar
+        label="Check"
+        value={data.stats.ratings.skillCheck}
+        color="bg-yellow-600"
+      />
+      <StatBar
+        label="Speed"
+        value={data.stats.ratings.movementSpeed}
+        color="bg-blue-400"
+      />
+      <StatBar
+        label="Stamina"
+        value={data.stats.ratings.stamina}
+        color="bg-lime-500"
+      />
+
+      <StatBar
+        label="Stealth"
+        value={data.stats.ratings.stealth}
+        color="bg-blue-400"
+      />
+      <StatBar
+        label="Estraction"
+        value={data.stats.ratings.extractionSpeed}
+        color="bg-purple-400"
+      />
+    </div>
+
+    {/* Footer: Habilidades y Botón */}
+    <div
+      class="flex items-center justify-between border-t border-gray-800 pt-4"
+    >
+      <div class="flex gap-2">
+        {
+          data.abilities.map((ability) => (
+            <div
+              class="flex h-8 w-8 items-center justify-center rounded border border-gray-700 bg-gray-800 text-xs text-gray-400 transition-colors hover:border-white hover:text-white"
+              title={ability.name}
+            >
+              {/* Aquí iría el icono real, usamos la inicial por ahora */}
+              {ability.name[0]}
+            </div>
+          ))
+        }
+      </div>
+
+      <a
+        href={`/wiki/characters/${id}`}
+        class="rounded bg-white/10 px-4 py-2 text-xs font-bold tracking-wide text-white uppercase transition-colors hover:bg-white/20"
+      >
+        Ver Datos
+      </a>
+    </div>
+  </div>
+</article>

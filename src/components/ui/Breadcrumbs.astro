@@ -1,0 +1,53 @@
+---
+interface Props {
+  items: {
+    label: string;
+    href?: string; // Opcional, el último elemento no lleva enlace
+  }[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav
+  aria-label="Breadcrumb"
+  class="mb-6 flex items-center space-x-2 font-mono text-sm text-gray-500"
+>
+  <a href="/" class="transition-colors hover:text-white">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      ><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline
+        points="9 22 9 12 15 12 15 22"></polyline></svg
+    >
+  </a>
+
+  {
+    items.map((item, index) => (
+      <>
+        <span class="opacity-50">/</span>
+
+        {item.href ? (
+          <a
+            href={item.href}
+            class="tracking-wider uppercase transition-colors hover:text-yellow-400"
+          >
+            {item.label}
+          </a>
+        ) : (
+          /* El último ítem (página actual) no es clicable y destaca más */
+          <span class="pointer-events-none font-bold tracking-wider text-white uppercase">
+            {item.label}
+          </span>
+        )}
+      </>
+    ))
+  }
+</nav>

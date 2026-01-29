@@ -1,0 +1,36 @@
+---
+interface Props {
+  label: string;
+  value: number; // Valor actual (ej: 3)
+  max?: number; // Valor máximo (ej: 5)
+  color?: string; // Clase de color de Tailwind (ej: 'bg-green-500')
+}
+
+const { label, value, max = 5, color = "bg-yellow-400" } = Astro.props;
+
+// Creamos un array vacío para iterar los "puntos" de la barra
+const segments = Array.from({ length: max });
+---
+
+<div class="mb-1 flex items-center gap-2 font-mono text-xs">
+  <span class="w-24 text-right tracking-wider text-gray-400 uppercase"
+    >{label}</span
+  >
+
+  <div class="flex flex-1 gap-1">
+    {
+      segments.map((_, i) => (
+        <div
+          class:list={[
+            "h-2 w-full rounded-sm transition-all duration-300",
+            i < value
+              ? `${color} shadow-[0_0_5px_currentColor]`
+              : "bg-gray-800",
+          ]}
+        />
+      ))
+    }
+  </div>
+
+  <span class="w-4 text-right text-gray-500">{value}</span>
+</div>
