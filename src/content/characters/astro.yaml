@@ -1,64 +1,99 @@
 id: "astro"
 code: "MN-01"
 name: "Astro"
-category: "Main"
-type: "Toon"
+fullName: "Astro Novalite"
+
+# Clasificación
+species: "Toon" # Esto activa la validación de Toon
+rarity: "Main"
+roles:
+  - "Support"
+  - "Distractor" # Ejemplo si tuviera doble rol
+
 releaseDate: 2024-06-14
 gender: "Male"
-description: "Astro, full name Astro Novalite, is one of the 38 playable Toons in Dandy's World. He was introduced on June 14, 2024."
-assets:
-  avatar: "./assets/astro-avatar.png"
-  fullBody: "./assets/astro-full.png"
+description: "Astro is one of the 8 playable Main Characters..."
 
+assets:
+  avatar: "./assets/toons/astro/astro-avatar.png"
+  fullBody: "./assets/toons/astro/astro-full.png"
+
+# Stats Atómicas (Perfectas para filtrar)
 stats:
-  ratings:
-    health: 2
-    skillCheck: 2
-    movementSpeed: 3
-    stamina: 3
-    stealth: 5
-    extractionSpeed: 3
-  raw:
-    healthPoints: 2
-    staminaPoints: 150
-    walkSpeed: 15
-    sprintSpeed: 25
+  health:
+    rating: 2
+    hearts: 2
+  skillCheck:
+    rating: 2
+    data:
+      chance: 25 # %
+      size: 100
+      value: 1.50
+      speed: 2
+  movementSpeed:
+    rating: 3
+    data:
+      walk: 15
+      sprint: 25
+  stamina:
+    rating: 3
+    value: 150
+  stealth:
+    rating: 5
+    range: 20
+  extractionSpeed:
+    rating: 3
+    multiplier: 1.00
 
 abilities:
   - name: "Nap Time"
     slug: "nap_time"
     type: "Active"
-    description: "Crea un pulso que restaura completamente la Stamina de los Toons cercanos."
+    description: "This Toon can create a pulse that fully restores the Stamina of the Toons around him."
     cooldown: 60
-    icon: "./assets/icons/nap-time.webp"
+    icon: "./assets/toons/astro/icons/nap-time.png" # Si existe
   - name: "Well Rested"
     slug: "well_rested"
     type: "Passive"
-    description: "Regenera Stamina 50% más rápido y ve Toons con baja stamina."
+    description: "This Toon regenerates Stamina 50% faster, and can see Toons below 50% Stamina around the map."
 
 unlock:
-  purchasable: true
   cost: 5000
   currency: "Ichor"
   requirements:
-    - type: "Research"
-      target: "Twisted Astro"
-      value: 100
-      description: "100% Research on Twisted Astro"
-    - type: "Encounter"
-      target: "Twisted Dandy"
-      description: "Encounter Twisted Dandy"
+    - "100% Research on Twisted Astro"
+    - "Encounter Twisted Dandy"
 
 mastery:
   tasks:
-    - description: "Usa la habilidad activa"
-      count: 100
-      progressType: "Use"
-    - description: "Recorre metros"
-      count: 150000
-      progressType: "Run"
+    - "Use this Toon's Active Ability 100 times!"
+    - "Purchase 25 Items from Dandy's Elevator Shop!"
+    - "Travel 150,000 Meters!"
+    - "Experience 12 Blackouts!"
+    - "Pick up 125 Items!"
+    - "Use 125 Items!"
   reward:
     skinName: "Vintage Astro"
+    skinImage: "./assets/toons/astro/skins/vintage.png"
 
-# Aquí ocurre la magia de las referencias
+skins:
+  - id: "default"
+    name: "Default"
+    image: "./assets/toons/astro/skins/default.png"
+  - id: "vintage"
+    name: "Vintage"
+    image: "./assets/toons/astro/skins/vintage.png"
+
+audio:
+  - file: "./assets/toons/astro/audio/ability-1.mp3"
+    description: "The sound that plays when Astro uses his Nap Time ability"
+    type: "Ability"
+  - file: "./assets/toons/astro/audio/speech.mp3"
+    description: "The sound that plays when a speech box appears over Astro's head"
+    type: "Voice"
+
+trinket:
+  name: "Sleepy Cap" # Inventado el nombre
+  image: "./assets/toons/astro/trinkets/cap.png"
+
 relatedTwisted: "twisted-astro"

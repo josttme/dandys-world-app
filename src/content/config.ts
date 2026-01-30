@@ -1,132 +1,158 @@
 import { defineCollection, reference, z } from "astro:content";
+import type { SchemaContext } from "astro:content";
 
-// Definimos los Enums para filtros rápidos y sin errores de tipeo
-const ClassEnum = z.enum(["Main", "Toon", "Twisted"]);
-const RoleEnum = z.enum(["Extractor", "Distractor", "Support", "Survivalist"]); // Ejemplos
-const AbilityTypeEnum = z.enum(["Active", "Passive"]);
+// --- ENUMS (Vocabulario Controlado) ---
+const EntityType = z.enum(["Toon", "Twisted"]);
+const RarityType = z.enum(["Common", "Main", "Event", "Lethal"]);
+const RoleType = z.enum(["Extractor", "Distractor", "Support", "Survivalist"]);
 
-const characters = defineCollection({
-  type: "data", // Usamos JSON o YAML (YAML es más limpio para escribir a mano)
+// --- SUB-ESQUEMAS (Para mantener el código limpio) ---
+
+// Estadísticas detalladas (Separamos Rating visual de Data Real)
+const StatsSchema = z.object({
+  health: z.object({
+    rating: z.number().min(1).max(5),
+    hearts: z.number(), // Ej: 2
+  }),
+  skillCheck: z.object({
+    rating: z.number().min(1).max(5),
+    data: z.object({
+      chance: z.number(), // % (ej: 25)
+      size: z.number(), // (ej: 100)
+      value: z.number(), // (ej: 1.50)
+      speed: z.number(), // (ej: 2)
+    }),
+  }),
+  movementSpeed: z.object({
+    rating: z.number().min(1).max(5),
+    data: z.object({
+      walk: z.number(),
+      sprint: z.number(),
+    }),
+  }),
+  stamina: z.object({
+    rating: z.number().min(1).max(5),
+    value: z.number(), // Ej: 150
+  }),
+  stealth: z.object({
+    rating: z.number().min(1).max(5),
+    range: z.number(), // Ej: 20
+  }),
+  extractionSpeed: z.object({
+    rating: z.number().min(1).max(5),
+    multiplier: z.number(), // Ej: 1.00
+  }),
+});
+
+// Esquema Base (Compartido por Toons y Twisteds)
+const BaseCharacter = ({ image }: SchemaContext) =>
+  z.object({
+    id: z.string(),
+    code: z.string(), // MN-01
+    name: z.string(),
+    fullName: z.string().optional(),
+
+    // Jerarquía y Roles
+    species: EntityType, // Toon o Twisted
+    rarity: RarityType, // Main, Common, etc.
+    roles: z.array(RoleType).optional(), // Array porque puede ser Extractor Y Support
+
+    releaseDate: z.date(),
+    gender: z.enum(["Male", "Female", "Non-Binary", "Unknown"]),
+    description: z.string(),
+
+    // Assets base
+    assets: z.object({
+      avatar: image(),
+      fullBody: image(),
+    }),
+  });
+
+// --- SCHEMA PRINCIPAL ---
+const charactersCollection = defineCollection({
+  type: "data",
   schema: ({ image }) =>
-    z.object({
-      // --- IDENTIFICACIÓN ---
-      id: z.string(), // Slug único: 'astro'
-      code: z.string(),
-      name: z.string(),
-      aliases: z.array(z.string()).optional(), // Apodos
-      releaseDate: z.date(), // Formato ISO real para ordenar cronológicamente
+    z.discriminatedUnion("species", [
+      // 1. ESQUEMA PARA "TOONS" (Jugables)
+      BaseCharacter({ image }).extend({
+        species: z.literal("Toon"),
 
-      // --- CLASIFICACIÓN (Vital para filtros) ---
-      category: ClassEnum,
-      role: RoleEnum.optional(), // Algunos quizás no tengan rol definido aún
-      gender: z.enum(["Male", "Female", "Non-Binary", "Unknown"]),
+        // Stats de Jugador
+        stats: StatsSchema,
 
-      // --- ASSETS (Optimización automática de imágenes) ---
-      // Usar el helper 'image()' valida que la imagen exista en tu carpeta.
-      assets: z.object({
-        avatar: image(),
-        fullBody: image(),
-        icon: image().optional(), // Para el minimapa o UI
-      }),
-
-      // --- STATS COMPLEJOS (Lo que pediste) ---
-      // Separamos las "Estrellas" (UI) de los "Valores" (Lógica)
-      stats: z.object({
-        ratings: z.object({
-          // Las estrellas que se ven en la carta (1-5)
-          health: z.number().min(1).max(5),
-          skillCheck: z.number().min(1).max(5),
-          movementSpeed: z.number().min(1).max(5),
-          stamina: z.number().min(1).max(5),
-          stealth: z.number().min(1).max(5),
-          extractionSpeed: z.number().min(1).max(5),
-        }),
-        raw: z
-          .object({
-            // Los datos técnicos para los nerds de la wiki
-            healthPoints: z.number(), // Ej: 2 hearts
-            staminaPoints: z.number(), // Ej: 150
-            walkSpeed: z.number(), // Ej: 15
-            sprintSpeed: z.number(), // Ej: 25
-          })
-          .optional(), // Opcional por si algún dato no se conoce aún
-      }),
-
-      // --- HABILIDADES (Polimórficas) ---
-      abilities: z
-        .array(
+        // Habilidades
+        abilities: z.array(
           z.object({
             name: z.string(),
-            slug: z.string(), // Para anchors
-            type: AbilityTypeEnum,
-            icon: image().optional(), // Icono de la habilidad
+            slug: z.string(), // nap_time (para URLs)
+            type: z.enum(["Active", "Passive"]),
             description: z.string(),
-            cooldown: z.number().optional(), // Solo si es activa
-            duration: z.number().optional(), // Duración del efecto
+            cooldown: z.number().optional(), // Segundos (Solo activa)
+            duration: z.number().optional(), // Si aplica
+            icon: image().optional(),
           })
-        )
-        .max(2), // Máximo 2 habilidades por Toon
+        ),
 
-      // --- SISTEMA DE DESBLOQUEO (Estructurado) ---
-      unlock: z.object({
-        purchasable: z.boolean(),
-        cost: z.number().optional(), // Cantidad de Ichor
-        currency: z.enum(["Ichor", "Tapes"]).default("Ichor"),
-        requirements: z
+        // Maestría (Solo los Toons tienen esto)
+        mastery: z.object({
+          tasks: z.array(z.string()), // Lista de tareas simple
+          reward: z.object({
+            skinName: z.string(),
+            skinImage: image().optional(),
+          }),
+        }),
+
+        // Skins
+        skins: z
           .array(
             z.object({
-              type: z.enum(["Research", "Encounter", "Quest", "Item"]),
-              target: z.string(), // "Twisted Astro", "Dandy", etc.
-              value: z.number().optional(), // "100%", "1 vez", etc.
-              description: z.string(), // Texto legible para mostrar
+              id: z.string(),
+              name: z.string(),
+              image: image(),
             })
           )
           .optional(),
+
+        // Extras
+        audio: z
+          .array(
+            z.object({
+              file: z.string(), // Path al archivo mp3 (z.string porque image() no valida audio aun)
+              description: z.string(),
+              type: z.enum(["Ability", "Voice", "Interaction"]).optional(),
+            })
+          )
+          .optional(),
+
+        trinket: z
+          .object({
+            name: z.string(),
+            image: image(),
+          })
+          .optional(),
+
+        // Requisitos de compra
+        unlock: z.object({
+          cost: z.number(),
+          currency: z.enum(["Ichor", "Tapes"]),
+          requirements: z.array(z.string()), // Strings simples para la UI
+        }),
+
+        relatedTwisted: reference("characters").optional(),
       }),
 
-      // --- MAESTRÍA (Gamification) ---
-      mastery: z
-        .object({
-          tasks: z.array(
-            z.object({
-              description: z.string(), // "Usa la habilidad 100 veces"
-              count: z.number(), // 100
-              progressType: z.enum([
-                "Use",
-                "Buy",
-                "Run",
-                "Blackout",
-                "Collect",
-              ]),
-            })
-          ),
-          reward: z.object({
-            skinName: z.string(), // "Vintage Astro"
-            skinImage: image().optional(),
-          }),
-        })
-        .optional(),
+      // 2. ESQUEMA PARA "TWISTEDS" (Enemigos)
+      BaseCharacter({ image }).extend({
+        species: z.literal("Twisted"),
 
-      // --- RELACIONES (El toque profesional) ---
-      // Enlaza automáticamente al archivo del Twisted sin hardcodear URLs
-      relatedTwisted: reference("characters").optional(),
-      trinket: reference("trinkets").optional(), // Asumiendo que crearás una colección de trinkets
-
-      // --- LORE & MEDIA ---
-      description: z.string(),
-      voiceLines: z
-        .array(
-          z.object({
-            text: z.string(),
-            audio: z.string().optional(), // Path al archivo de audio
-            trigger: z.string(), // "On Spawn", "On Hit"
-          })
-        )
-        .optional(),
-    }),
+        // Los Twisted tienen stats diferentes (Velocidad de caza, radio de terror, etc.)
+        // Definiremos esto más adelante cuando tengas datos de Twisted,
+        // por ahora dejamos un objeto libre para no bloquearte.
+        twistStats: z.record(z.any()).optional(),
+      }),
+    ]),
 });
 
 export const collections = {
-  characters: characters,
-  // 'trinkets': trinketsCollection... (Futuro)
+  characters: charactersCollection,
 };
